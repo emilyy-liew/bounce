@@ -1,8 +1,8 @@
-export default function Task({ taskName }) {
+export default function Task({ task, onCheckboxClick }) {
   return (
     <div>
-      <input type="checkbox" id="name" />
-      <label htmlFor="name">{taskName}</label>
+      <input type="checkbox" id={task.id} onClick={onCheckboxClick}/>
+      <label htmlFor={task.id}>{task.taskName}</label>
     </div>
   );
 }
