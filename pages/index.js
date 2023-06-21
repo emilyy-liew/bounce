@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ToDoList from './components/toDoList';
 
 function Header({ title }) {
   return <h1>{title ? title : "Default title"}</h1>
@@ -15,11 +16,7 @@ export default function HomePage() {
   return (
     <div>
     <Header title="Develop. Preview. Ship. 🚀" />
-    <ul>
-      {names.map((name) => (
-        <li key={name}>{name}</li>
-      ))}
-    </ul>
+    <ToDoList />
 
     <button onClick={handleClick}>Like ({likes})</button>
     </div>

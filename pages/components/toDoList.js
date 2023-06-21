@@ -1,3 +1,7 @@
+import Task from "./task";
+
 export default function ToDoList() {
-  return;
+  return (
+    <Task task="Take out the trash" />
+  );
 }
