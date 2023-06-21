@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ToDoList from './components/toDoList';
+import ToDoList from './components/ToDoList';
 
 function Header({ title }) {
   return <h1>{title ? title : "Default title"}</h1>
