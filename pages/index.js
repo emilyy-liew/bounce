@@ -16,9 +16,10 @@ export default function HomePage() {
   return (
     <div>
     <Header title="Develop. Preview. Ship. 🚀" />
+
+    <button onClick={handleClick}>Like ({likes})</button><br />
     <ToDoList />
 
-    <button onClick={handleClick}>Like ({likes})</button>
     </div>
   )
 }

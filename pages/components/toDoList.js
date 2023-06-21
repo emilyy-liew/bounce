@@ -2,6 +2,6 @@ import Task from "./task";
 
 export default function ToDoList() {
   return (
-    <Task task="Take out the trash" />
+    <Task taskName="Take out the trash" />
   );
 }
