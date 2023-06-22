@@ -19,6 +19,7 @@ export default function ToDoList() {
       }
       newTaskList.push(newTask);
       setTaskList(newTaskList);
+      event.target.value = "";
     }
   }
 
