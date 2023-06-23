@@ -6,7 +6,7 @@ export default function ToDoList() {
   const [taskList, setTaskList] = useState([]);
   const [name, setTaskName] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState('');
 
   function handleCheckboxClick(id) {
     const newTaskList = taskList.filter((task) => task.id != id);
@@ -24,9 +24,9 @@ export default function ToDoList() {
       }
       newTaskList.push(newTask);
       setTaskList(newTaskList);
-      setTaskName("");
-      setDeadline("");
-      setDuration(0);
+      setTaskName('');
+      setDeadline('');
+      setDuration('');
     }
   }
 
@@ -36,9 +36,9 @@ export default function ToDoList() {
 
   return (
     <>
-      <input type="text" value={name} onChange={(event) => handleChange(event, setTaskName)} onKeyPress={(event) => handleKeyPress(event)} />
+      <input type="text" placeholder="Enter task" value={name} onChange={(event) => handleChange(event, setTaskName)} onKeyPress={(event) => handleKeyPress(event)} />
       <input type="date" value={deadline} onChange={(event) => handleChange(event, setDeadline)} onKeyPress={(event) => handleKeyPress(event)} />
-      <input type="number" value={duration} onChange={(event) => handleChange(event, setDuration)} onKeyPress={(event) => handleKeyPress(event)} />
+      <input type="number" placeholder="Enter task duration" value={duration} onChange={(event) => handleChange(event, setDuration)} onKeyPress={(event) => handleKeyPress(event)} />
       {taskList.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task.id)}/>)}
     </>
   );

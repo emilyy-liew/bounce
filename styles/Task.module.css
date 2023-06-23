@@ -1,0 +1,30 @@
+.element {
+    position: absolute;
+    top: 0;
+}
+
+.label {
+    width: 128px;
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+}
+
+.name {
+    position: relative;
+    left: 20px;
+    padding-right: 10px;
+}
+
+.deadline {
+    left: 148px;
+}
+.duration {
+    left: 276px;
+}
+
+.container {
+    position: relative;
+    margin: 10px 0;
+}
