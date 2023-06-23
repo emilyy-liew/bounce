@@ -4,6 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState([]);
+  const [name, setTaskName] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [duration, setDuration] = useState(0);
 
   function handleCheckboxClick(id) {
     const newTaskList = taskList.filter((task) => task.id != id);
@@ -15,17 +18,27 @@ export default function ToDoList() {
       let newTaskList = taskList.slice();
       const newTask = {
         id: uuidv4(),
-        taskName: event.target.value
+        taskName: name,
+        taskDeadline: deadline,
+        taskDuration: duration
       }
       newTaskList.push(newTask);
       setTaskList(newTaskList);
-      event.target.value = "";
+      setTaskName("");
+      setDeadline("");
+      setDuration(0);
     }
+  }
+
+  function handleChange(event, setter) {
+    setter(event.target.value);
   }
 
   return (
     <>
-      <input type="text" onKeyPress={(event) => handleKeyPress(event)} />
+      <input type="text" value={name} onChange={(event) => handleChange(event, setTaskName)} onKeyPress={(event) => handleKeyPress(event)} />
+      <input type="date" value={deadline} onChange={(event) => handleChange(event, setDeadline)} onKeyPress={(event) => handleKeyPress(event)} />
+      <input type="number" value={duration} onChange={(event) => handleChange(event, setDuration)} onKeyPress={(event) => handleKeyPress(event)} />
       {taskList.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task.id)}/>)}
     </>
   );
