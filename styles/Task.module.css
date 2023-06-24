@@ -6,8 +6,6 @@
 .label {
     width: 128px;
     display: inline-block;
-    display: flex;
-    flex-direction: column;
     word-wrap: break-word;
 }
 
@@ -20,11 +18,16 @@
 .deadline {
     left: 148px;
 }
+
 .duration {
     left: 276px;
 }
 
+.countdown {
+    left: 404px;
+}
+
 .container {
     position: relative;
-    margin: 10px 0;
+    margin: 5px 0;
 }
