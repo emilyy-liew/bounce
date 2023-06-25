@@ -1,6 +1,7 @@
 import Task from "./Task";
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import styles from '../../styles/ToDoList.module.css';
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState([]);
@@ -12,6 +13,10 @@ export default function ToDoList() {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      const newDate = new Date();
+      if (newDate.getDate() !== currentDate.getDate()) {
+        setCompleted([]);
+      }
       setCurrentDate(new Date());
     }, 1000);
 
@@ -85,17 +90,17 @@ export default function ToDoList() {
       {categories.map((tasks, index) => {
         if (index > 0 && tasks !== undefined) {
           return (
-            <>
-              <p>{index - 1} days left</p>
+            <div className={styles.container}>
+              <p>{index - 1} {(index == 2 ? "day" : "days")} left</p>
               {tasks.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
-            </>
+            </div>
           );
         } else if (tasks !== undefined && tasks.length > 0) {
           return (
-            <>
+            <div className={styles.container}>
               <p>Completed</p>
               {tasks.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
-            </>
+            </div>
           )
         }
       })}
