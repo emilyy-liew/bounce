@@ -6,6 +6,7 @@ import styles from '../../styles/ToDoList.module.css';
 export default function ToDoList() {
   const [taskList, setTaskList] = useState([]);
   const [completed, setCompleted] = useState([]);
+  const [someday, setSomeday] = useState([]);
   const [name, setTaskName] = useState('');
   const [deadline, setDeadline] = useState('');
   const [duration, setDuration] = useState('');
@@ -14,10 +15,11 @@ export default function ToDoList() {
   useEffect(() => {
     const interval = setInterval(() => {
       const newDate = new Date();
+      console.log(newDate.getDate() + " " + currentDate.getDate())
       if (newDate.getDate() !== currentDate.getDate()) {
         setCompleted([]);
       }
-      setCurrentDate(new Date());
+      setCurrentDate(newDate);
     }, 1000);
 
     return () => {
@@ -27,25 +29,38 @@ export default function ToDoList() {
 
   function handleCheckboxClick(task) {
     let newCompleted = completed.slice();
-    let newTaskList = taskList.slice();
-
     task.checked = !task.checked;
 
-    if (task.checked) {
-      newCompleted.push(task);
-      newTaskList = taskList.filter((curr) => curr.id != task.id);
-    } else {
-      newTaskList.push(task);
-      newCompleted = completed.filter((curr) => curr.id != task.id);
-    }
+    if (task.taskDeadline == '') {
+      let newSomeday = someday.slice();
+      if (task.checked) {
+        newCompleted.push(task);
+        newSomeday = someday.filter((curr) => curr.id != task.id);
+      } else {
+        newSomeday.push(task);
+        newCompleted = completed.filter((curr) => curr.id != task.id);
+      }
 
-    setTaskList(newTaskList);
+      setSomeday(newSomeday);
+    } else {
+      let newTaskList = taskList.slice();
+
+      if (task.checked) {
+        newCompleted.push(task);
+        newTaskList = taskList.filter((curr) => curr.id != task.id);
+      } else {
+        newTaskList.push(task);
+        newCompleted = completed.filter((curr) => curr.id != task.id);
+      }
+  
+      setTaskList(newTaskList);
+    }
+    
     setCompleted(newCompleted);
   }
 
   function handleKeyPress(event) {
     if (event.key == "Enter") {
-      let newTaskList = taskList.slice();
       const newTask = {
         id: uuidv4(),
         taskName: name,
@@ -53,8 +68,16 @@ export default function ToDoList() {
         taskDuration: duration,
         checked: false
       }
-      newTaskList.push(newTask);
-      setTaskList(newTaskList);
+
+      if (deadline === '') {
+        let newSomeday = someday.slice();
+        newSomeday.push(newTask);
+        setSomeday(newSomeday)
+      } else {
+        let newTaskList = taskList.slice();
+        newTaskList.push(newTask);
+        setTaskList(newTaskList);
+      }
       setTaskName('');
       setDeadline('');
       setDuration('');
@@ -80,30 +103,34 @@ export default function ToDoList() {
     categories[difference].push(task);
   })
 
-  categories = [completed, ...categories];
-
   return (
     <>
       <input type="text" placeholder="Enter task" value={name} onChange={(event) => handleChange(event, setTaskName)} onKeyPress={(event) => handleKeyPress(event)} />
       <input type="date" value={deadline} onChange={(event) => handleChange(event, setDeadline)} onKeyPress={(event) => handleKeyPress(event)} />
       <input type="number" placeholder="Enter task duration" value={duration} onChange={(event) => handleChange(event, setDuration)} onKeyPress={(event) => handleKeyPress(event)} />
+    
+      {completed.length > 0
+        ? <div className={styles.container}>
+            <p>Completed</p>
+            {completed.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
+          </div>
+        : false}
+      
       {categories.map((tasks, index) => {
-        if (index > 0 && tasks !== undefined) {
           return (
             <div className={styles.container}>
-              <p>{index - 1} {(index == 2 ? "day" : "days")} left</p>
+              <p>{index} {(index == 1 ? "day" : "days")} left</p>
               {tasks.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
             </div>
           );
-        } else if (tasks !== undefined && tasks.length > 0) {
-          return (
-            <div className={styles.container}>
-              <p>Completed</p>
-              {tasks.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
-            </div>
-          )
-        }
       })}
+
+      {someday.length > 0
+        ? <div className={styles.container}>
+            <p>Someday</p>
+            {someday.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
+          </div>
+        : false}
     </>
   );
 }
