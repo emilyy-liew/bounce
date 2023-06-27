@@ -1,7 +1,11 @@
-import Task from "./Task";
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
+import Task from "./Task";
+import Toggle from "./Toggle";
+
 import styles from '../../styles/ToDoList.module.css';
+import { render } from 'react-dom';
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState([]);
@@ -11,6 +15,8 @@ export default function ToDoList() {
   const [deadline, setDeadline] = useState('');
   const [duration, setDuration] = useState('');
   const [currentDate, setCurrentDate] = useState(new Date());
+
+  const test = ['hi', 'this', 'is', 'a', 'test'];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -103,34 +109,34 @@ export default function ToDoList() {
     categories[difference].push(task);
   })
 
+  function renderList(list, label, visibility) {
+    return (
+      <div className={styles.container}>
+        <Toggle label={label} initialVisiblility={visibility}>
+          {list.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
+        </Toggle>
+      </div>
+    )
+  }
+
   return (
     <>
       <input type="text" placeholder="Enter task" value={name} onChange={(event) => handleChange(event, setTaskName)} onKeyPress={(event) => handleKeyPress(event)} />
       <input type="date" value={deadline} onChange={(event) => handleChange(event, setDeadline)} onKeyPress={(event) => handleKeyPress(event)} />
       <input type="number" placeholder="Enter task duration" value={duration} onChange={(event) => handleChange(event, setDuration)} onKeyPress={(event) => handleKeyPress(event)} />
-    
-      {completed.length > 0
-        ? <div className={styles.container}>
-            <p>Completed</p>
-            {completed.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
-          </div>
-        : false}
+
+      {completed.length > 0 ? renderList(completed, "Completed", true) : false}
       
       {categories.map((tasks, index) => {
-          return (
-            <div className={styles.container}>
-              <p>{index} {(index == 1 ? "day" : "days")} left</p>
-              {tasks.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
-            </div>
-          );
+        if (index) {
+          return renderList(tasks, `${index} ${index === 1 ? "day" : "days"} left`, false);
+        } else {
+          return renderList(tasks, "0 days left", true);
+        }
       })}
 
-      {someday.length > 0
-        ? <div className={styles.container}>
-            <p>Someday</p>
-            {someday.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
-          </div>
-        : false}
+      {someday.length > 0 ? renderList(someday, "Someday", false) : false}
+
     </>
   );
 }
