@@ -5,7 +5,6 @@ import Task from "./Task";
 import Toggle from "./Toggle";
 
 import styles from '../../styles/ToDoList.module.css';
-import { render } from 'react-dom';
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState([]);
@@ -15,8 +14,6 @@ export default function ToDoList() {
   const [deadline, setDeadline] = useState('');
   const [duration, setDuration] = useState('');
   const [currentDate, setCurrentDate] = useState(new Date());
-
-  const test = ['hi', 'this', 'is', 'a', 'test'];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,34 +30,25 @@ export default function ToDoList() {
   }, []);
 
   function handleCheckboxClick(task) {
-    let newCompleted = completed.slice();
     task.checked = !task.checked;
 
-    if (task.taskDeadline == '') {
-      let newSomeday = someday.slice();
-      if (task.checked) {
-        newCompleted.push(task);
-        newSomeday = someday.filter((curr) => curr.id != task.id);
-      } else {
-        newSomeday.push(task);
-        newCompleted = completed.filter((curr) => curr.id != task.id);
-      }
-
-      setSomeday(newSomeday);
+    if (task.taskDeadline === '') {
+      updateLists(task, someday.slice(), setSomeday, completed.slice());
     } else {
-      let newTaskList = taskList.slice();
-
-      if (task.checked) {
-        newCompleted.push(task);
-        newTaskList = taskList.filter((curr) => curr.id != task.id);
-      } else {
-        newTaskList.push(task);
-        newCompleted = completed.filter((curr) => curr.id != task.id);
-      }
-  
-      setTaskList(newTaskList);
+      updateLists(task, taskList.slice(), setTaskList, completed.slice());
     }
-    
+  }
+
+  function updateLists(task, list, setter, newCompleted) {
+    if (task.checked) {
+      newCompleted.push(task);
+      list = list.filter((curr) => curr.id != task.id);
+    } else {
+      list.push(task);
+      newCompleted = newCompleted.filter((curr) => curr.id != task.id);
+    }
+
+    setter(list);
     setCompleted(newCompleted);
   }
 
@@ -70,12 +58,13 @@ export default function ToDoList() {
         id: uuidv4(),
         taskName: name,
         taskDeadline: deadline,
-        taskDuration: duration,
+        taskDuration: duration === '' || duration < 0 ? 0 : duration,
         checked: false
       }
 
       if (deadline === '') {
         let newSomeday = someday.slice();
+        newTask.today = newTask.taskDuration;
         newSomeday.push(newTask);
         setSomeday(newSomeday)
       } else {
@@ -97,9 +86,8 @@ export default function ToDoList() {
   taskList.map((task) => {
     const deadline = new Date(task.taskDeadline);
     let difference = Math.floor((deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
-    task.today = Math.ceil(task.taskDuration/(task.difference < 1 ? 1 : task.difference));
+    task.today = Math.ceil(task.taskDuration/(difference < 1 ? 1 : difference));
     difference = difference - Math.ceil(task.taskDuration / 30);
-  
     if (difference < 1) {
       difference = 0;
     }
@@ -125,9 +113,9 @@ export default function ToDoList() {
     <>
       <input type="text" placeholder="Enter task" value={name} onChange={(event) => handleChange(event, setTaskName)} onKeyPress={(event) => handleKeyPress(event)} />
       <input type="date" value={deadline} onChange={(event) => handleChange(event, setDeadline)} onKeyPress={(event) => handleKeyPress(event)} />
-      <input type="number" placeholder="Enter task duration" value={duration} onChange={(event) => handleChange(event, setDuration)} onKeyPress={(event) => handleKeyPress(event)} />
+      <input type="number" placeholder="Enter task duration" min="0" value={duration} onChange={(event) => handleChange(event, setDuration)} onKeyPress={(event) => handleKeyPress(event)} />
 
-      {completed.length > 0 ? renderList(completed, "Completed", true) : false}
+      {completed.length > 0 ? renderList(completed, `Completed (${completed.length})`, true, setCompleted) : false}
       
       {categories.map((tasks, index) => {
         if (index) {
@@ -137,7 +125,7 @@ export default function ToDoList() {
         }
       })}
 
-      {someday.length > 0 ? renderList(someday, "Someday", false) : false}
+      {someday.length > 0 ? renderList(someday, `Someday (${someday.length})`, false) : false}
 
     </>
   );
