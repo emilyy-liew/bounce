@@ -21,6 +21,7 @@ export default function Toggle({ children, initialVisiblility, label }) {
                 height={18}
                 className={styles.icon}
                 onClick={handleOnClick}
+                alt="expand toggle button"
                 />
             <p onClick={handleOnClick}>{label}</p>
             {isVisible ? children : false}

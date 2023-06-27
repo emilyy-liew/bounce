@@ -21,7 +21,6 @@ export default function ToDoList() {
   useEffect(() => {
     const interval = setInterval(() => {
       const newDate = new Date();
-      console.log(newDate.getDate() + " " + currentDate.getDate())
       if (newDate.getDate() !== currentDate.getDate()) {
         setCompleted([]);
       }
@@ -98,6 +97,9 @@ export default function ToDoList() {
   taskList.map((task) => {
     const deadline = new Date(task.taskDeadline);
     let difference = Math.floor((deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
+    task.today = Math.ceil(task.taskDuration/(task.difference < 1 ? 1 : task.difference));
+    difference = difference - Math.ceil(task.taskDuration / 30);
+  
     if (difference < 1) {
       difference = 0;
     }
@@ -129,9 +131,9 @@ export default function ToDoList() {
       
       {categories.map((tasks, index) => {
         if (index) {
-          return renderList(tasks, `${index} ${index === 1 ? "day" : "days"} left`, false);
+          return renderList(tasks, `${index} ${index === 1 ? "day" : "days"} left (${tasks.length})`, false);
         } else {
-          return renderList(tasks, "0 days left", true);
+          return renderList(tasks, `0 days left (${tasks.length})`, true);
         }
       })}
 
