@@ -1,12 +1,17 @@
+import Stopwatch from './Stopwatch';
+
 import styles from '../../styles/Task.module.css';
 
-export default function Task({ task, onCheckboxClick }) {
+export default function Task({ task, onCheckboxClick, onStopClick }) {
   return (
     <div className={styles.container}>
       <input className={styles.element} type="checkbox" checked={task.checked} id={task.id} onClick={onCheckboxClick}/>
-      <label className={`${styles.element} ${styles.label} ${styles.name}`}>{task.taskName}</label>
-      <label className={`${styles.element} ${styles.label} ${styles.deadline}`}>{task.taskDeadline}</label>
-      <label className={`${styles.element} ${styles.label} ${styles.duration}`}>{task.today} min</label>
+      <div className={styles.labelsContainer}>
+        <label className={styles.label}>{task.taskName}</label>
+        <label className={`${styles.label} ${styles.deadline}`}>{task.taskDeadline}</label>
+        <label className={`${styles.label} ${styles.duration}`}>{task.today} min</label>
+        <Stopwatch task={task} onStopClick={onStopClick}/>
+      </div>
     </div>
   );
 }

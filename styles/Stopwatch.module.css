@@ -1,0 +1,13 @@
+.button {
+    margin-right: 4px;
+}
+
+.button:hover {
+    cursor: pointer;
+    border: solid 2px rgb(0, 153, 255);
+    border-radius: 9999px;
+}
+
+.time {
+    margin-left: 4px;
+}

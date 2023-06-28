@@ -3,28 +3,24 @@
     top: 0;
 }
 
-.label {
-    width: 128px;
-    display: inline-block;
-    word-wrap: break-word;
+.labelsContainer {
+    display: flex;
+    flex-direction: row;
+    margin-left: 28px;
 }
 
-.name {
-    position: relative;
-    left: 20px;
-    padding-right: 10px;
+.label {
+    width: 128px;
+    word-wrap: break-word;
+    margin-right: 20px;
 }
 
 .deadline {
-    left: 148px;
+    width: 75px;
 }
 
 .duration {
-    left: 276px;
-}
-
-.countdown {
-    left: 404px;
+    width: 75px;
 }
 
 .container {

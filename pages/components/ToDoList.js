@@ -96,6 +96,7 @@ export default function ToDoList() {
       categories[difference] = [];
     }
 
+    task.difference = difference;
     categories[difference].push(task);
   })
 
@@ -103,10 +104,37 @@ export default function ToDoList() {
     return (
       <div className={styles.container}>
         <Toggle label={label} initialVisiblility={visibility}>
-          {list.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} />)}
+          {list.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} onStopClick={handleStop} />)}
         </Toggle>
       </div>
     )
+  }
+
+  function handlePlay() {
+
+  }
+  
+  function handleStop(time, task) {
+    const deadline = new Date(task.taskDeadline);
+
+    task.taskDuration -= Math.floor(time / 60);
+    if (task.taskDuration < 0) {
+      task.taskDuration += 30;
+    }
+
+    let difference = Math.floor((deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    task.today = Math.ceil(task.taskDuration/(difference < 1 ? 1 : difference));
+    difference = difference - Math.ceil(task.taskDuration / 30);
+
+    categories[task.difference] = categories[task.difference].filter((curr) => {curr.id != task.id})
+    task.difference = difference;
+
+    if (categories[difference] === undefined) {
+      categories[difference] = [];
+    }
+
+    categories[difference].push(task);
   }
 
   return (
