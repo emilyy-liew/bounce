@@ -23,7 +23,7 @@ export default function Toggle({ children, initialVisiblility, label }) {
                 onClick={handleOnClick}
                 alt="expand toggle button"
                 />
-            <p onClick={handleOnClick}>{label}</p>
+            <p onClick={handleOnClick} className={styles.p}>{label}</p>
             {isVisible ? children : false}
         </div>
     )    

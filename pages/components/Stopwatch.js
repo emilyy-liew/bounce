@@ -7,14 +7,13 @@ import stop from '../../images/stop.png';
 
 import styles from '../../styles/Stopwatch.module.css';
 
-export default function Stopwatch({ task, onStopClick}) {
+export default function Stopwatch({ task, onStopClick, onPlayClick }) {
     const [time, setTime] = useState(0);
-    const [isRunning, setIsRunning] = useState(false);
     
     useEffect(() => {
         let timer;
 
-        if (isRunning) {
+        if (task.isRunning) {
             timer = setInterval(() => {
                 setTime((prevTime) => prevTime + 1);
             }, 1000);
@@ -24,14 +23,10 @@ export default function Stopwatch({ task, onStopClick}) {
             clearInterval(timer);
         };
         
-    }, [isRunning]);
-
-    function handlePlay() {
-        setIsRunning(true);
-    }
+    }, [task.isRunning]);
 
     function handlePause() {
-        setIsRunning(false);
+        task.isRunning = false;
     }
 
     const formatTime = (time) => {
@@ -50,7 +45,7 @@ export default function Stopwatch({ task, onStopClick}) {
             width={18}
             height={18}
             className={styles.button}
-            onClick={handlePlay}
+            onClick={onPlayClick}
             alt='Start timer button'
             />
             <Image

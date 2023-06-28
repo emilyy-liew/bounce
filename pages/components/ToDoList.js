@@ -14,6 +14,7 @@ export default function ToDoList() {
   const [deadline, setDeadline] = useState('');
   const [duration, setDuration] = useState('');
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentTask, setCurrentTask] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -104,21 +105,26 @@ export default function ToDoList() {
     return (
       <div className={styles.container}>
         <Toggle label={label} initialVisiblility={visibility}>
-          {list.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} onStopClick={handleStop} />)}
+          {list.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} onStopClick={handleStop} onPlayClick={() => handlePlay(task)}/>)}
         </Toggle>
       </div>
     )
   }
 
-  function handlePlay() {
+  function handlePlay(task) {
+    if (currentTask !== null && currentTask !== task) {
+      currentTask.isRunning = false;
+    }
 
+    task.isRunning = true;
+    setCurrentTask(task);
   }
-  
+
   function handleStop(time, task) {
     const deadline = new Date(task.taskDeadline);
 
     task.taskDuration -= Math.floor(time / 60);
-    if (task.taskDuration < 0) {
+    while (task.taskDuration < 0) {
       task.taskDuration += 30;
     }
 

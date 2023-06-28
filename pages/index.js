@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ToDoList from './components/ToDoList';
 
 function Header({ title }) {
@@ -9,10 +8,8 @@ export default function HomePage() {
 
   return (
     <div>
-    <Header title="Bounce. 🚀" />
-
-    <ToDoList />
-
+      <Header title="Bounce. 🚀" />
+      <ToDoList />
     </div>
   )
 }
