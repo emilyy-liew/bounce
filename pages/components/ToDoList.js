@@ -101,10 +101,10 @@ export default function ToDoList() {
     categories[difference].push(task);
   })
 
-  function renderList(list, label, visibility) {
+  function renderList(list, label, length) {
     return (
       <div className={styles.container}>
-        <Toggle label={label} initialVisiblility={visibility}>
+        <Toggle label={label} length={length}>
           {list.map((task) => <Task key={task.id} task={task} onCheckboxClick={() => handleCheckboxClick(task)} onStopClick={handleStop} onPlayClick={() => handlePlay(task)}/>)}
         </Toggle>
       </div>
@@ -124,8 +124,8 @@ export default function ToDoList() {
     const deadline = new Date(task.taskDeadline);
 
     task.taskDuration -= Math.floor(time / 60);
-    while (task.taskDuration < 0) {
-      task.taskDuration += 30;
+    if (task.taskDuration < 0) {
+      task.taskDuration = 0;
     }
 
     let difference = Math.floor((deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
@@ -149,17 +149,17 @@ export default function ToDoList() {
       <input type="date" value={deadline} onChange={(event) => handleChange(event, setDeadline)} onKeyPress={(event) => handleKeyPress(event)} />
       <input type="number" placeholder="Enter task duration" min="0" value={duration} onChange={(event) => handleChange(event, setDuration)} onKeyPress={(event) => handleKeyPress(event)} />
 
-      {completed.length > 0 ? renderList(completed, `Completed (${completed.length})`, true, setCompleted) : false}
+      {completed.length > 0 ? renderList(completed, `Completed`, completed.length) : false}
       
       {categories.map((tasks, index) => {
         if (index) {
-          return renderList(tasks, `${index} ${index === 1 ? "day" : "days"} left (${tasks.length})`, false);
+          return renderList(tasks, `${index} ${index === 1 ? "day" : "days"} left`, tasks.length);
         } else {
-          return renderList(tasks, `0 days left (${tasks.length})`, true);
+          return renderList(tasks, `0 days left`, tasks.length);
         }
       })}
 
-      {someday.length > 0 ? renderList(someday, `Someday (${someday.length})`, false) : false}
+      {someday.length > 0 ? renderList(someday, `Someday`, someday.length) : false}
 
     </>
   );
