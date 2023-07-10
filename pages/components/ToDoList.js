@@ -121,26 +121,28 @@ export default function ToDoList() {
   }
 
   function handleStop(time, task) {
-    const deadline = new Date(task.taskDeadline);
+    if (taskList.includes(task)) {
+      const deadline = new Date(task.taskDeadline);
 
-    task.taskDuration -= Math.floor(time / 60);
-    if (task.taskDuration < 0) {
-      task.taskDuration = 0;
+      task.taskDuration -= Math.floor(time / 60);
+      if (task.taskDuration < 0) {
+        task.taskDuration = 0;
+      }
+  
+      let difference = Math.floor((deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
+  
+      task.today = Math.ceil(task.taskDuration/(difference < 1 ? 1 : difference));
+      difference = difference - Math.ceil(task.taskDuration / 30);
+      console.log(difference);
+      categories[task.difference] = categories[task.difference].filter((curr) => {curr.id !== task.id})
+      task.difference = difference;
+  
+      if (categories[difference] === undefined) {
+        categories[difference] = [];
+      }
+  
+      categories[difference].push(task);
     }
-
-    let difference = Math.floor((deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
-
-    task.today = Math.ceil(task.taskDuration/(difference < 1 ? 1 : difference));
-    difference = difference - Math.ceil(task.taskDuration / 30);
-
-    categories[task.difference] = categories[task.difference].filter((curr) => {curr.id != task.id})
-    task.difference = difference;
-
-    if (categories[difference] === undefined) {
-      categories[difference] = [];
-    }
-
-    categories[difference].push(task);
   }
 
   return (
