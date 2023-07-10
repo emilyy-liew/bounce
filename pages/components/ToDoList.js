@@ -113,7 +113,7 @@ export default function ToDoList() {
   }
 
   function handlePlay(task) {
-    if (currentTask !== null && currentTask !== task) {
+    if (currentTask && currentTask !== task) {
       currentTask.isRunning = false;
     }
 
