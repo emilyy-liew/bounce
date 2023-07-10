@@ -60,7 +60,8 @@ export default function ToDoList() {
         taskName: name,
         taskDeadline: deadline,
         taskDuration: duration === '' || duration < 0 ? 0 : duration,
-        checked: false
+        checked: false,
+        isRunning: false
       }
 
       if (deadline === '') {
