@@ -46,7 +46,7 @@ export default function ToDoList() {
       list = list.filter((curr) => curr.id != task.id);
     } else {
       list.push(task);
-      newCompleted = newCompleted.filter((curr) => curr.id != task.id);
+      newCompleted = newCompleted.filter((curr) => curr.id !== task.id);
     }
 
     setter(list);
