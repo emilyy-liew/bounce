@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, MouseEventHandler } from "react";
 import Image from "next/image";
 
 import play from "../../images/play.png";
@@ -10,8 +10,8 @@ import styles from "../../styles/Stopwatch.module.css";
 
 export default function Stopwatch({ task, onStopClick, onPlayClick }: {
   task: TaskItem;
-  onStopClick: (time: number, task: TaskItem) => void;
-  onPlayClick: (task: TaskItem) => void;
+  onStopClick: MouseEventHandler<HTMLInputElement>;
+  onPlayClick: MouseEventHandler<HTMLInputElement>;
 }) {
   const [time, setTime] = useState(0);
 
