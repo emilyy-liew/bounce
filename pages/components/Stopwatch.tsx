@@ -51,7 +51,7 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
         width={18}
         height={18}
         className={styles.button}
-        onClick={onPlayClick}
+        onClick={(event) => onPlayClick(task)}
         alt="Start timer button"
       />
       <Image
@@ -59,7 +59,7 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
         width={18}
         height={18}
         className={styles.button}
-        onClick={handlePause}
+        onClick={(event) => handlePause()}
         alt="Pause timer button"
       />
       <Image
@@ -67,7 +67,7 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
         width={18}
         height={18}
         className={styles.button}
-        onClick={() => {
+        onClick={(event) => {
           handlePause();
           onStopClick(time, task);
           setTime(0);
