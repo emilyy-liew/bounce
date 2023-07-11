@@ -10,7 +10,7 @@ import styles from "../../styles/Stopwatch.module.css";
 
 export default function Stopwatch({ task, onStopClick, onPlayClick }: {
   task: TaskItem;
-  onStopClick: MouseEventHandler<HTMLImageElement>;
+  onStopClick: (time: number, task: TaskItem) => void;
   onPlayClick: MouseEventHandler<HTMLImageElement>;
 }) {
   const [time, setTime] = useState(0);

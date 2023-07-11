@@ -14,8 +14,8 @@ export interface TaskItem {
   difference?: number;
 }
 
-export default function Task({ task, onCheckboxClick, onStopClick, onPlayClick }:
-  { task: TaskItem;
+export default function Task({ task, onCheckboxClick, onStopClick, onPlayClick }: { 
+    task: TaskItem;
     onCheckboxClick: MouseEventHandler<HTMLInputElement>;
     onStopClick: (time: number, task: TaskItem) => void;
     onPlayClick: (task: TaskItem) => void;
