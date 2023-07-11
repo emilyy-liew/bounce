@@ -13,12 +13,16 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
   onStopClick: (time: number, task: TaskItem) => void;
   onPlayClick: (task: TaskItem) => void;
 }) {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState<number>(0);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsRunning(task.isRunning);
+  }, [task.isRunning]);
 
   useEffect(() => {
     let timer;
-    console.log(task);
-    if (task.isRunning) {
+    if (isRunning) {
       timer = setInterval(() => {
         setTime((prevTime) => prevTime + 1);
       }, 1000);
@@ -27,10 +31,10 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
     return () => {
       clearInterval(timer);
     };
-  }, [task.isRunning]);
+  }, [isRunning]);
 
   function handlePause() {
-    task.isRunning = false;
+    setIsRunning(false);
   }
 
   const formatTime = (time) => {

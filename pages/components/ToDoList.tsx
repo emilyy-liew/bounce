@@ -66,7 +66,7 @@ export default function ToDoList() {
         deadline: deadline,
         duration: duration === null || duration < 0 ? 0 : duration,
         checked: false,
-        isRunning: false,
+        isRunning: false
       };
 
       if (deadline === "") {
@@ -140,6 +140,8 @@ export default function ToDoList() {
     task.isRunning = true;
     setCurrentTask(task);
   }
+
+  console.log(taskList);
 
   function handleStop(time: number,
                       task: TaskItem) {
