@@ -2,20 +2,11 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import Task from "./Task";
+import { TaskItem } from "./Task";
 import Toggle from "./Toggle";
 
 import styles from "../../styles/ToDoList.module.css";
 
-interface TaskItem {
-  id: string;
-  name: string;
-  deadline: string;
-  duration: number;
-  checked: boolean;
-  isRunning: boolean;
-  today?: number;
-  difference?: number;
-}
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
