@@ -8,7 +8,7 @@ function Header({ title }) {
 export default function HomePage() {
   return (
     <div>
-      <Header title="Bounce. 🚀" />
+      <Header title="Hello World. 🌎" />
       <IconBar />
       <ToDoList />
     </div>

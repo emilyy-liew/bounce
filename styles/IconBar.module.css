@@ -1,0 +1,25 @@
+.button {
+  margin-right: 4px;
+}
+
+.button:hover {
+  cursor: pointer;
+  border: solid 2px rgb(0, 153, 255);
+  border-radius: 9999px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 10%;
+  height: 90vh;
+  background-color: rgb(175, 110, 148);
+  margin-right: 10px;
+  border-radius: 15px;
+}
+
+.link {
+  width: 36px;
+  display: inline-block;
+}

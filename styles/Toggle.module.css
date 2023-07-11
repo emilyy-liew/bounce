@@ -1,12 +1,12 @@
 .icon {
-    float: left;
-    margin-right: 4px;
+  float: left;
+  margin-right: 4px;
 }
 
 .icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .p:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

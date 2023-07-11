@@ -1,29 +1,29 @@
 .element {
-    position: absolute;
-    top: 0;
+  position: absolute;
+  top: 0;
 }
 
 .labelsContainer {
-    display: flex;
-    flex-direction: row;
-    margin-left: 28px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 28px;
 }
 
 .label {
-    width: 128px;
-    word-wrap: break-word;
-    margin-right: 20px;
+  width: 128px;
+  word-wrap: break-word;
+  margin-right: 20px;
 }
 
 .deadline {
-    width: 75px;
+  width: 75px;
 }
 
 .duration {
-    width: 75px;
+  width: 75px;
 }
 
 .container {
-    position: relative;
-    margin: 5px 0;
+  position: relative;
+  margin: 5px 0;
 }
