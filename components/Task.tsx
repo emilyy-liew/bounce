@@ -1,6 +1,6 @@
 import Stopwatch from './Stopwatch';
 
-import styles from '../../styles/Task.module.css';
+import styles from '../styles/Task.module.css';
 
 export interface TaskItem {
   id: string;

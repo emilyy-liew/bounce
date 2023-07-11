@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-import play from "../../images/play.png";
-import pause from "../../images/pause.png";
-import stop from "../../images/stop.png";
+import play from "../images/play.png";
+import pause from "../images/pause.png";
+import stop from "../images/stop.png";
 import { TaskItem } from "./Task";
 
 import styles from "../../styles/Stopwatch.module.css";

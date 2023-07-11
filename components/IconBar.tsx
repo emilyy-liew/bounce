@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import pause from "../../images/pause.png";
+import pause from "../images/pause.png";
 
-import styles from "../../styles/IconBar.module.css";
+import styles from "../styles/IconBar.module.css";
 
 export default function IconBar() {
   return (

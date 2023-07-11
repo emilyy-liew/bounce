@@ -5,7 +5,7 @@ import Task from "./Task";
 import { TaskItem } from "./Task";
 import Toggle from "./Toggle";
 
-import styles from "../../styles/ToDoList.module.css";
+import styles from "../styles/ToDoList.module.css";
 
 
 export default function ToDoList() {

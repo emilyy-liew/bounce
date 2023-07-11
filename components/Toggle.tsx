@@ -1,11 +1,11 @@
 import { useState, ReactNode } from "react";
 import Image from "next/image";
 
-import openToggleImg from "../../images/toggle_open.png";
-import closeToggleImg from "../../images/toggle_close.png";
+import openToggleImg from "../images/toggle_open.png";
+import closeToggleImg from "../images/toggle_close.png";
 
-import styles from "../../styles/Toggle.module.css";
-import utilStyles from "../../styles/utils.module.css";
+import styles from "../styles/Toggle.module.css";
+import utilStyles from "../styles/utils.module.css";
 
 export default function Toggle({ children, label, length }: {
   children: ReactNode;
