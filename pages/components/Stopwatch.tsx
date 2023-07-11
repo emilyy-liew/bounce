@@ -17,8 +17,14 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsRunning(task.isRunning);
-  }, [task.isRunning]);
+    let timer = setInterval(() => {
+        setIsRunning(task.isRunning);
+      }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   useEffect(() => {
     let timer;
