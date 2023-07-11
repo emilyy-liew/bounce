@@ -1,5 +1,5 @@
-import ToDoList from "./components/ToDoList";
-import IconBar from "./components/IconBar";
+import ToDoList from "../components/ToDoList";
+import IconBar from "../components/IconBar";
 
 function Header({ title }) {
   return <h1>{title ? title : "Default title"}</h1>;
