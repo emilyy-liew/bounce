@@ -15,7 +15,6 @@ export interface TaskItem {
 }
 
 export default function Task({ task, onCheckboxChange, onStopClick, onPlayClick }: { 
-    key: string;
     task: TaskItem;
     onCheckboxChange: (task: TaskItem) => void;
     onStopClick: (time: number, task: TaskItem) => void;
