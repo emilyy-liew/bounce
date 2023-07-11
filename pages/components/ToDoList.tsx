@@ -14,7 +14,7 @@ export default function ToDoList() {
   const [someday, setSomeday] = useState<TaskItem[]>([]);
   const [name, setName] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
-  const [duration, setDuration] = useState<number | null>(null);
+  const [duration, setDuration] = useState<number | undefined>(undefined);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [currentTask, setCurrentTask] = useState<TaskItem>(null);
 
@@ -81,7 +81,7 @@ export default function ToDoList() {
       }
       setName("");
       setDeadline("");
-      setDuration(null);
+      setDuration(undefined);
     }
   }
 
