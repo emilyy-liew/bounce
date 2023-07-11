@@ -21,7 +21,7 @@ export default function Task({ task, onCheckboxClick, onStopClick, onPlayClick }
     onPlayClick: (task: TaskItem) => void;
   }) {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} key={task.id}>
       <input className={styles.element} type="checkbox" checked={task.checked} id={task.id} onClick={onCheckboxClick}/>
       <div className={styles.labelsContainer}>
         <label className={styles.label}>{task.name}</label>

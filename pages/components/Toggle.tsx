@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import Image from "next/image";
 
 import openToggleImg from "../../images/toggle_open.png";
@@ -7,8 +7,12 @@ import closeToggleImg from "../../images/toggle_close.png";
 import styles from "../../styles/Toggle.module.css";
 import utilStyles from "../../styles/utils.module.css";
 
-export default function Toggle({ children, label, length }) {
-  const [isVisible, setIsVisible] = useState(true);
+export default function Toggle({ children, label, length }: {
+  children: ReactNode;
+  label: string;
+  length: number;
+}) {
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   function handleOnClick() {
     setIsVisible(!isVisible);

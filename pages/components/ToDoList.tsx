@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import Task from "./Task";
@@ -117,17 +117,16 @@ export default function ToDoList() {
                       length: number) {
     return (
       <div className={styles.container}>
-        <Toggle label={label} length={length}>
-          {list.map((task) => (
+        <Toggle label={label} length={length}
+          children={list.map((task) => (
             <Task
-              key={task.id}
               task={task}
               onCheckboxClick={() => handleCheckboxClick(task)}
               onStopClick={handleStop}
               onPlayClick={() => handlePlay(task)}
             />
           ))}
-        </Toggle>
+        />
       </div>
     );
   }
