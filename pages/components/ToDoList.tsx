@@ -6,15 +6,26 @@ import Toggle from "./Toggle";
 
 import styles from "../../styles/ToDoList.module.css";
 
+interface TaskItem {
+  id: string;
+  name?: string;
+  deadline?: string;
+  duration?: number;
+  checked: boolean;
+  isRunning: boolean;
+  today?: number;
+  difference?: number;
+}
+
 export default function ToDoList() {
-  const [taskList, setTaskList] = useState([]);
-  const [completed, setCompleted] = useState([]);
-  const [someday, setSomeday] = useState([]);
-  const [name, setTaskName] = useState("");
-  const [deadline, setDeadline] = useState("");
-  const [duration, setDuration] = useState("");
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [currentTask, setCurrentTask] = useState(null);
+  const [taskList, setTaskList] = useState<TaskItem[]>([]);
+  const [completed, setCompleted] = useState<TaskItem[]>([]);
+  const [someday, setSomeday] = useState<TaskItem[]>([]);
+  const [name, setName] = useState<string>("");
+  const [deadline, setDeadline] = useState<string>("");
+  const [duration, setDuration] = useState<number | null>(null);
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const [currentTask, setCurrentTask] = useState<TaskItem>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,7 +44,7 @@ export default function ToDoList() {
   function handleCheckboxClick(task) {
     task.checked = !task.checked;
 
-    if (task.taskDeadline === "") {
+    if (task.deadline === "") {
       updateLists(task, someday.slice(), setSomeday, completed.slice());
     } else {
       updateLists(task, taskList.slice(), setTaskList, completed.slice());
@@ -55,18 +66,18 @@ export default function ToDoList() {
 
   function handleKeyPress(event) {
     if (event.key == "Enter") {
-      const newTask = {
+      const newTask : TaskItem = {
         id: uuidv4(),
-        taskName: name,
-        taskDeadline: deadline,
-        taskDuration: duration === "" || duration < 0 ? 0 : duration,
+        name: name,
+        deadline: deadline,
+        duration: duration === null || duration < 0 ? 0 : duration,
         checked: false,
         isRunning: false,
       };
 
       if (deadline === "") {
         let newSomeday = someday.slice();
-        newTask.today = newTask.taskDuration;
+        newTask.today = newTask.duration;
         newSomeday.push(newTask);
         setSomeday(newSomeday);
       } else {
@@ -74,9 +85,9 @@ export default function ToDoList() {
         newTaskList.push(newTask);
         setTaskList(newTaskList);
       }
-      setTaskName("");
+      setName("");
       setDeadline("");
-      setDuration("");
+      setDuration(null);
     }
   }
 
@@ -86,14 +97,14 @@ export default function ToDoList() {
 
   let categories = [];
   taskList.map((task) => {
-    const deadline = new Date(task.taskDeadline);
+    const deadline = new Date(task.deadline);
     let difference = Math.floor(
       (deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
     );
     task.today = Math.ceil(
-      task.taskDuration / (difference < 1 ? 1 : difference)
+      task.duration / (difference < 1 ? 1 : difference)
     );
-    difference = difference - Math.ceil(task.taskDuration / 30);
+    difference = difference - Math.ceil(task.duration / 30);
     if (difference < 1) {
       difference = 0;
     }
@@ -135,11 +146,11 @@ export default function ToDoList() {
 
   function handleStop(time, task) {
     if (taskList.includes(task)) {
-      const deadline = new Date(task.taskDeadline);
+      const deadline = new Date(task.deadline);
 
-      task.taskDuration -= Math.floor(time / 60);
-      if (task.taskDuration < 0) {
-        task.taskDuration = 0;
+      task.duration -= Math.floor(time / 60);
+      if (task.duration < 0) {
+        task.duration = 0;
       }
 
       let difference = Math.floor(
@@ -147,9 +158,9 @@ export default function ToDoList() {
       );
 
       task.today = Math.ceil(
-        task.taskDuration / (difference < 1 ? 1 : difference)
+        task.duration / (difference < 1 ? 1 : difference)
       );
-      difference = difference - Math.ceil(task.taskDuration / 30);
+      difference = difference - Math.ceil(task.duration / 30);
       console.log(difference);
       categories[task.difference] = categories[task.difference].filter(
         (curr) => {
@@ -172,7 +183,7 @@ export default function ToDoList() {
         type="text"
         placeholder="Enter task"
         value={name}
-        onChange={(event) => handleChange(event, setTaskName)}
+        onChange={(event) => handleChange(event, setName)}
         onKeyPress={(event) => handleKeyPress(event)}
       />
       <input
