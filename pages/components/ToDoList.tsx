@@ -64,7 +64,7 @@ export default function ToDoList() {
         id: uuidv4(),
         name: name,
         deadline: deadline,
-        duration: duration === null || duration < 0 ? 0 : duration,
+        duration: duration === undefined || duration < 0 ? 0 : duration,
         isRunning: false,
         checked: false
       };
@@ -159,11 +159,7 @@ export default function ToDoList() {
         task.duration / (difference < 1 ? 1 : difference)
       );
       difference = difference - Math.ceil(task.duration / 30);
-      categories[task.difference] = categories[task.difference].filter(
-        (curr) => {
-          curr.id !== task.id;
-        }
-      );
+      categories[task.difference] = categories[task.difference].filter((curr) => curr.id !== task.id);
       task.difference = difference;
 
       if (categories[difference] === undefined) {
@@ -203,7 +199,7 @@ export default function ToDoList() {
         : false}
 
       {categories.map((tasks, index) => {
-        if (index) {
+        if (index && tasks !== undefined) {
           return renderList(
             tasks,
             `${index} ${index === 1 ? "day" : "days"} left`,

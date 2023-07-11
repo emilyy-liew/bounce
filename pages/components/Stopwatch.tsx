@@ -40,6 +40,7 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
   }, [isRunning]);
 
   function handlePause() {
+    task.isRunning = false;
     setIsRunning(false);
   }
 
