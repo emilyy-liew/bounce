@@ -8,9 +8,9 @@ import styles from "../../styles/ToDoList.module.css";
 
 interface TaskItem {
   id: string;
-  name?: string;
-  deadline?: string;
-  duration?: number;
+  name: string;
+  deadline: string;
+  duration: number;
   checked: boolean;
   isRunning: boolean;
   today?: number;
@@ -41,7 +41,7 @@ export default function ToDoList() {
     };
   }, []);
 
-  function handleCheckboxClick(task) {
+  function handleCheckboxClick( task: TaskItem ) {
     task.checked = !task.checked;
 
     if (task.deadline === "") {
@@ -51,7 +51,10 @@ export default function ToDoList() {
     }
   }
 
-  function updateLists(task, list, setter, newCompleted) {
+  function updateLists(task: TaskItem,
+                      list: TaskItem[],
+                      setter: React.Dispatch<React.SetStateAction<TaskItem[]>>,
+                      newCompleted: TaskItem[]) {
     if (task.checked) {
       newCompleted.push(task);
       list = list.filter((curr) => curr.id != task.id);
@@ -64,7 +67,7 @@ export default function ToDoList() {
     setCompleted(newCompleted);
   }
 
-  function handleKeyPress(event) {
+  function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key == "Enter") {
       const newTask : TaskItem = {
         id: uuidv4(),
@@ -91,11 +94,12 @@ export default function ToDoList() {
     }
   }
 
-  function handleChange(event, setter) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>,
+                        setter: React.Dispatch<React.SetStateAction<any>>) {
     setter(event.target.value);
   }
 
-  let categories = [];
+  let categories : TaskItem[][] = [];
   taskList.map((task) => {
     const deadline = new Date(task.deadline);
     let difference = Math.floor(
@@ -117,7 +121,9 @@ export default function ToDoList() {
     categories[difference].push(task);
   });
 
-  function renderList(list, label, length) {
+  function renderList(list: TaskItem[],
+                      label: string,
+                      length: number) {
     return (
       <div className={styles.container}>
         <Toggle label={label} length={length}>
@@ -135,7 +141,7 @@ export default function ToDoList() {
     );
   }
 
-  function handlePlay(task) {
+  function handlePlay(task: TaskItem) {
     if (currentTask && currentTask !== task) {
       currentTask.isRunning = false;
     }
@@ -144,7 +150,8 @@ export default function ToDoList() {
     setCurrentTask(task);
   }
 
-  function handleStop(time, task) {
+  function handleStop(time: number,
+                      task: TaskItem) {
     if (taskList.includes(task)) {
       const deadline = new Date(task.deadline);
 

@@ -16,7 +16,7 @@
   height: 90vh;
   background-color: rgb(175, 110, 148);
   margin-right: 10px;
-  border-radius: 15px;
+  border-radius: 0 15px 15px 0;
 }
 
 .link {
