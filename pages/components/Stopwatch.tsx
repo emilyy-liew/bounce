@@ -4,10 +4,15 @@ import Image from "next/image";
 import play from "../../images/play.png";
 import pause from "../../images/pause.png";
 import stop from "../../images/stop.png";
+import { TaskItem } from "./Task";
 
 import styles from "../../styles/Stopwatch.module.css";
 
-export default function Stopwatch({ task, onStopClick, onPlayClick }) {
+export default function Stopwatch({ task, onStopClick, onPlayClick }: {
+  task: TaskItem;
+  onStopClick: (time: number, task: TaskItem) => void;
+  onPlayClick: (task: TaskItem) => void;
+}) {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
