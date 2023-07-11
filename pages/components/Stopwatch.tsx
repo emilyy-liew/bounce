@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEventHandler } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import play from "../../images/play.png";
