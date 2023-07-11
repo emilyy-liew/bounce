@@ -8,22 +8,23 @@ export interface TaskItem {
   name: string;
   deadline: string;
   duration: number;
-  checked: boolean;
   isRunning: boolean;
+  checked: boolean;
   today?: number;
   difference?: number;
 }
 
-export default function Task({ task, onCheckboxClick, onStopClick, onPlayClick }: { 
+export default function Task({ task, onCheckboxChange, onStopClick, onPlayClick }: { 
     key: string;
     task: TaskItem;
-    onCheckboxClick: MouseEventHandler<HTMLInputElement>;
+    onCheckboxChange: (task: TaskItem) => void;
     onStopClick: (time: number, task: TaskItem) => void;
     onPlayClick: (task: TaskItem) => void;
   }) {
+
   return (
     <div className={styles.container}>
-      <input className={styles.element} type="checkbox" checked={task.checked} id={task.id} onClick={onCheckboxClick}/>
+      <input className={styles.element} type="checkbox" id={task.id} onChange={onCheckboxChange} defaultChecked={task.checked}/>
       <div className={styles.labelsContainer}>
         <label className={styles.label}>{task.name}</label>
         <label className={`${styles.label} ${styles.deadline}`}>{task.deadline}</label>

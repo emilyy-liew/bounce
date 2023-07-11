@@ -32,23 +32,23 @@ export default function ToDoList() {
     };
   }, []);
 
-  function handleCheckboxClick( task: TaskItem ) {
-    task.checked = !task.checked;
-
+  function handleCheckboxClick( event, task: TaskItem ) {
+    task.checked = event.target.checked;
     if (task.deadline === "") {
-      updateLists(task, someday.slice(), setSomeday, completed.slice());
+      updateLists(task, someday.slice(), setSomeday, completed.slice(), event.target.checked);
     } else {
-      updateLists(task, taskList.slice(), setTaskList, completed.slice());
+      updateLists(task, taskList.slice(), setTaskList, completed.slice(), event.target.checked);
     }
   }
 
   function updateLists(task: TaskItem,
                       list: TaskItem[],
                       setter: React.Dispatch<React.SetStateAction<TaskItem[]>>,
-                      newCompleted: TaskItem[]) {
-    if (task.checked) {
+                      newCompleted: TaskItem[],
+                      execute: boolean) {
+    if (execute) {
       newCompleted.push(task);
-      list = list.filter((curr) => curr.id != task.id);
+      list = list.filter((curr) => curr.id !== task.id);
     } else {
       list.push(task);
       newCompleted = newCompleted.filter((curr) => curr.id !== task.id);
@@ -65,8 +65,8 @@ export default function ToDoList() {
         name: name,
         deadline: deadline,
         duration: duration === null || duration < 0 ? 0 : duration,
-        checked: false,
-        isRunning: false
+        isRunning: false,
+        checked: false
       };
 
       if (deadline === "") {
@@ -122,7 +122,7 @@ export default function ToDoList() {
             <Task
               key={task.id}
               task={task}
-              onCheckboxClick={() => handleCheckboxClick(task)}
+              onCheckboxChange={(event) => handleCheckboxClick(event, task)}
               onStopClick={handleStop}
               onPlayClick={() => handlePlay(task)}
             />
@@ -140,8 +140,6 @@ export default function ToDoList() {
     task.isRunning = true;
     setCurrentTask(task);
   }
-
-  console.log(taskList);
 
   function handleStop(time: number,
                       task: TaskItem) {
@@ -161,7 +159,6 @@ export default function ToDoList() {
         task.duration / (difference < 1 ? 1 : difference)
       );
       difference = difference - Math.ceil(task.duration / 30);
-      console.log(difference);
       categories[task.difference] = categories[task.difference].filter(
         (curr) => {
           curr.id !== task.id;
