@@ -17,7 +17,7 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
 
   useEffect(() => {
     let timer;
-
+    console.log(task);
     if (task.isRunning) {
       timer = setInterval(() => {
         setTime((prevTime) => prevTime + 1);

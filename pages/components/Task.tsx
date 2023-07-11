@@ -15,13 +15,14 @@ export interface TaskItem {
 }
 
 export default function Task({ task, onCheckboxClick, onStopClick, onPlayClick }: { 
+    key: string;
     task: TaskItem;
     onCheckboxClick: MouseEventHandler<HTMLInputElement>;
     onStopClick: (time: number, task: TaskItem) => void;
     onPlayClick: (task: TaskItem) => void;
   }) {
   return (
-    <div className={styles.container} key={task.id}>
+    <div className={styles.container}>
       <input className={styles.element} type="checkbox" checked={task.checked} id={task.id} onClick={onCheckboxClick}/>
       <div className={styles.labelsContainer}>
         <label className={styles.label}>{task.name}</label>

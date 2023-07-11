@@ -120,6 +120,7 @@ export default function ToDoList() {
         <Toggle label={label} length={length}
           children={list.map((task) => (
             <Task
+              key={task.id}
               task={task}
               onCheckboxClick={() => handleCheckboxClick(task)}
               onStopClick={handleStop}
