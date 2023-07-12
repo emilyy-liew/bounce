@@ -1,16 +1,20 @@
 import ToDoList from "../components/ToDoList";
 import IconBar from "../components/IconBar";
 
+import utilStyles from '../styles/utils.module.css';
+
 function Header({ title }) {
   return <h1>{title ? title : "Default title"}</h1>;
 }
 
 export default function HomePage() {
   return (
-    <div>
-      <Header title="Bounce. 🚀" />
+    <div className={utilStyles.rowStack}>
       <IconBar />
-      <ToDoList />
+      <div className={utilStyles.columnStack}>
+        <Header title="Bounce. 🚀" />
+        <ToDoList />
+      </div>
     </div>
   );
 }

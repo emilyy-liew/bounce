@@ -6,7 +6,7 @@ import { TaskItem } from "./Task";
 import Toggle from "./Toggle";
 
 import styles from "../styles/ToDoList.module.css";
-
+import utilStyles from '../styles/utils.module.css';
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
@@ -172,27 +172,30 @@ export default function ToDoList() {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="Enter task"
-        value={name}
-        onChange={(event) => handleChange(event, setName)}
-        onKeyPress={(event) => handleKeyPress(event)}
-      />
-      <input
-        type="date"
-        value={deadline}
-        onChange={(event) => handleChange(event, setDeadline)}
-        onKeyPress={(event) => handleKeyPress(event)}
-      />
-      <input
-        type="number"
-        placeholder="Enter task duration"
-        min="0"
-        value={duration}
-        onChange={(event) => handleChange(event, setDuration)}
-        onKeyPress={(event) => handleKeyPress(event)}
-      />
+      <div className={utilStyles.rowStack}>
+        <input
+          type="text"
+          placeholder="Enter task"
+          value={name}
+          onChange={(event) => handleChange(event, setName)}
+          onKeyPress={(event) => handleKeyPress(event)}
+        />
+        <input
+          type="date"
+          value={deadline}
+          onChange={(event) => handleChange(event, setDeadline)}
+          onKeyPress={(event) => handleKeyPress(event)}
+        />
+        <input
+          type="number"
+          placeholder="Enter task duration"
+          min="0"
+          value={duration}
+          onChange={(event) => handleChange(event, setDuration)}
+          onKeyPress={(event) => handleKeyPress(event)}
+        />
+      </div>
+      
 
       {completed.length > 0
         ? renderList(completed, `Completed`, completed.length)

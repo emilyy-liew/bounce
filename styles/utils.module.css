@@ -3,3 +3,13 @@
   font-size: 0.9em;
   margin: 0 0 0 8px;
 }
+
+.columnStack {
+  display: flex;
+  flex-direction: column;
+}
+
+.rowStack {
+  display: flex;
+  flex-direction: row;
+}
