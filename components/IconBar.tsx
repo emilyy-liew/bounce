@@ -17,13 +17,13 @@ export default function IconBar() {
           alt="Bounce"
         />
       </Link>
-      <Link href="/../helloWorld">
+      <Link href="/helloWorld" className={styles.link}>
         <Image
           src={pause}
           width={36}
           height={36}
           className={styles.button}
-          alt="Hello World"
+          alt="HelloWorld"
         />
       </Link>
     </div>

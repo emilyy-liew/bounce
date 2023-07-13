@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import Task from "./Task";
 import { TaskItem } from "./Task";
 import Toggle from "./Toggle";
+import { getData } from "../pages/api/tasklists";
 
 import styles from "../styles/ToDoList.module.css";
 import utilStyles from '../styles/utils.module.css';
@@ -17,6 +18,33 @@ export default function ToDoList() {
   const [duration, setDuration] = useState<number | undefined>(undefined);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [currentTask, setCurrentTask] = useState<TaskItem>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getData('emilyliew');
+        setCompleted(convertListToTaskList(data.Item.completed.L.map((item) => item.M)));
+        setSomeday(convertListToTaskList(data.Item.someday.L.map((item) => item.M)));
+        setTaskList(convertListToTaskList(data.Item.taskList.L.map((item) => item.M)));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  function convertListToTaskList(list) {
+    return list.map((task) => {
+      task.id = task.id.S;
+      task.name = task.taskName.S;
+      task.deadline = task.taskDeadline.S;
+      task.duration = task.taskDuration.N;
+      task.isRunning = task.isRunning.BOOL;
+      task.checked = task.checked.BOOL;
+      return task;
+    })
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
