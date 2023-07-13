@@ -7,7 +7,6 @@ function Header({ title }) {
 }
 
 export default function HomePage() {
-
   return (
     <div>
       <Header title="Hello World. 🌎" />
