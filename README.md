@@ -1,5 +1,8 @@
 # bounce
 
+![bounce](images/bounce.png)  
+Current version of [bounce](https://bounce-emilyy-liew.vercel.app/)
+
 ## Set up
 
 Clone this repo with  
