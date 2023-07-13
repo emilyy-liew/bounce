@@ -7,7 +7,7 @@ import Toggle from "./Toggle";
 import { getData } from "../pages/api/tasklists";
 
 import styles from "../styles/ToDoList.module.css";
-import utilStyles from '../styles/utils.module.css';
+import utilStyles from "../styles/utils.module.css";
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
@@ -22,12 +22,18 @@ export default function ToDoList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getData('emilyliew');
-        setCompleted(convertListToTaskList(data.Item.completed.L.map((item) => item.M)));
-        setSomeday(convertListToTaskList(data.Item.someday.L.map((item) => item.M)));
-        setTaskList(convertListToTaskList(data.Item.taskList.L.map((item) => item.M)));
+        const data = await getData("emilyliew");
+        setCompleted(
+          convertListToTaskList(data.Item.completed.L.map((item) => item.M))
+        );
+        setSomeday(
+          convertListToTaskList(data.Item.someday.L.map((item) => item.M))
+        );
+        setTaskList(
+          convertListToTaskList(data.Item.taskList.L.map((item) => item.M))
+        );
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -43,7 +49,7 @@ export default function ToDoList() {
       task.isRunning = task.isRunning.BOOL;
       task.checked = task.checked.BOOL;
       return task;
-    })
+    });
   }
 
   useEffect(() => {
@@ -60,20 +66,34 @@ export default function ToDoList() {
     };
   }, []);
 
-  function handleCheckboxClick( event, task: TaskItem ) {
+  function handleCheckboxClick(event, task: TaskItem) {
     task.checked = event.target.checked;
     if (task.deadline === "") {
-      updateLists(task, someday.slice(), setSomeday, completed.slice(), event.target.checked);
+      updateLists(
+        task,
+        someday.slice(),
+        setSomeday,
+        completed.slice(),
+        event.target.checked
+      );
     } else {
-      updateLists(task, taskList.slice(), setTaskList, completed.slice(), event.target.checked);
+      updateLists(
+        task,
+        taskList.slice(),
+        setTaskList,
+        completed.slice(),
+        event.target.checked
+      );
     }
   }
 
-  function updateLists(task: TaskItem,
-                      list: TaskItem[],
-                      setter: React.Dispatch<React.SetStateAction<TaskItem[]>>,
-                      newCompleted: TaskItem[],
-                      execute: boolean) {
+  function updateLists(
+    task: TaskItem,
+    list: TaskItem[],
+    setter: React.Dispatch<React.SetStateAction<TaskItem[]>>,
+    newCompleted: TaskItem[],
+    execute: boolean
+  ) {
     if (execute) {
       newCompleted.push(task);
       list = list.filter((curr) => curr.id !== task.id);
@@ -88,13 +108,13 @@ export default function ToDoList() {
 
   function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key == "Enter") {
-      const newTask : TaskItem = {
+      const newTask: TaskItem = {
         id: uuidv4(),
         name: name,
         deadline: deadline,
         duration: duration === undefined || duration < 0 ? 0 : duration,
         isRunning: false,
-        checked: false
+        checked: false,
       };
 
       if (deadline === "") {
@@ -113,20 +133,20 @@ export default function ToDoList() {
     }
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>,
-                        setter: React.Dispatch<React.SetStateAction<any>>) {
+  function handleChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    setter: React.Dispatch<React.SetStateAction<any>>
+  ) {
     setter(event.target.value);
   }
 
-  let categories : TaskItem[][] = [];
+  let categories: TaskItem[][] = [];
   taskList.map((task) => {
     const deadline = new Date(task.deadline);
     let difference = Math.floor(
       (deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
     );
-    task.today = Math.ceil(
-      task.duration / (difference < 1 ? 1 : difference)
-    );
+    task.today = Math.ceil(task.duration / (difference < 1 ? 1 : difference));
     difference = difference - Math.ceil(task.duration / 30);
     if (difference < 1) {
       difference = 0;
@@ -140,12 +160,12 @@ export default function ToDoList() {
     categories[difference].push(task);
   });
 
-  function renderList(list: TaskItem[],
-                      label: string,
-                      length: number) {
+  function renderList(list: TaskItem[], label: string, length: number) {
     return (
       <div className={styles.container}>
-        <Toggle label={label} length={length}
+        <Toggle
+          label={label}
+          length={length}
           children={list.map((task) => (
             <Task
               key={task.id}
@@ -169,8 +189,7 @@ export default function ToDoList() {
     setCurrentTask(task);
   }
 
-  function handleStop(time: number,
-                      task: TaskItem) {
+  function handleStop(time: number, task: TaskItem) {
     if (taskList.includes(task)) {
       const deadline = new Date(task.deadline);
 
@@ -183,11 +202,11 @@ export default function ToDoList() {
         (deadline.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
       );
 
-      task.today = Math.ceil(
-        task.duration / (difference < 1 ? 1 : difference)
-      );
+      task.today = Math.ceil(task.duration / (difference < 1 ? 1 : difference));
       difference = difference - Math.ceil(task.duration / 30);
-      categories[task.difference] = categories[task.difference].filter((curr) => curr.id !== task.id);
+      categories[task.difference] = categories[task.difference].filter(
+        (curr) => curr.id !== task.id
+      );
       task.difference = difference;
 
       if (categories[difference] === undefined) {
@@ -216,14 +235,13 @@ export default function ToDoList() {
         />
         <input
           type="number"
-          placeholder="Enter task duration"
+          placeholder="Enter task duration in mins"
           min="0"
           value={duration}
           onChange={(event) => handleChange(event, setDuration)}
           onKeyPress={(event) => handleKeyPress(event)}
         />
       </div>
-      
 
       {completed.length > 0
         ? renderList(completed, `Completed`, completed.length)
