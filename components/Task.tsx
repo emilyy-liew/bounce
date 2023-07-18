@@ -25,7 +25,7 @@ export default function Task(props: {
         className={styles.element}
         type="checkbox"
         id={props.task.id}
-        onChange={() => props.onCheckboxChange(props.task)}
+        onChange={(event) => props.onCheckboxChange(props.task)}
         defaultChecked={props.task.checked}
       />
       <div className={styles.labelsContainer}>

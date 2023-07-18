@@ -9,7 +9,7 @@ function Header({ title }) {
 
 export default function HomePage() {
   return (
-    <div className={utilStyles.rowStack}>
+    <div className={`${utilStyles.rowStack} ${utilStyles.background}`}>
       <IconBar />
       <div className={utilStyles.columnStack}>
         <Header title="Bounce. 🚀" />

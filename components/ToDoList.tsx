@@ -66,15 +66,15 @@ export default function ToDoList() {
     };
   }, []);
 
-  function handleCheckboxClick(event, task: TaskItem) {
-    task.checked = event.target.checked;
+  function handleCheckboxClick(task: TaskItem) {
+    task.checked = !task.checked;
     if (task.deadline === "") {
       updateLists(
         task,
         someday.slice(),
         setSomeday,
         completed.slice(),
-        event.target.checked
+        task.checked
       );
     } else {
       updateLists(
@@ -82,7 +82,7 @@ export default function ToDoList() {
         taskList.slice(),
         setTaskList,
         completed.slice(),
-        event.target.checked
+        task.checked
       );
     }
   }
@@ -106,7 +106,7 @@ export default function ToDoList() {
     setCompleted(newCompleted);
   }
 
-  function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key == "Enter") {
       const newTask: TaskItem = {
         id: uuidv4(),
@@ -170,7 +170,7 @@ export default function ToDoList() {
             <Task
               key={task.id}
               task={task}
-              onCheckboxChange={(event) => handleCheckboxClick(event, task)}
+              onCheckboxChange={(task) => handleCheckboxClick(task)}
               onStopClick={handleStop}
               onPlayClick={() => handlePlay(task)}
             />
@@ -225,13 +225,15 @@ export default function ToDoList() {
           placeholder="Enter task"
           value={name}
           onChange={(event) => handleChange(event, setName)}
-          onKeyPress={(event) => handleKeyPress(event)}
+          onKeyDown={(event) => handleKeyDown(event)}
+          className={styles.textInput}
         />
         <input
           type="date"
           value={deadline}
           onChange={(event) => handleChange(event, setDeadline)}
-          onKeyPress={(event) => handleKeyPress(event)}
+          onKeyDown={(event) => handleKeyDown(event)}
+          className={styles.dateInput}
         />
         <input
           type="number"
@@ -239,12 +241,13 @@ export default function ToDoList() {
           min="0"
           value={duration}
           onChange={(event) => handleChange(event, setDuration)}
-          onKeyPress={(event) => handleKeyPress(event)}
+          onKeyDown={(event) => handleKeyDown(event)}
+          className={styles.textInput}
         />
       </div>
 
       {completed.length > 0
-        ? renderList(completed, `Completed`, completed.length)
+        ? renderList(completed, "Completed", completed.length)
         : false}
 
       {categories.map((tasks, index) => {
@@ -260,7 +263,7 @@ export default function ToDoList() {
       })}
 
       {someday.length > 0
-        ? renderList(someday, `Someday`, someday.length)
+        ? renderList(someday, "Someday", someday.length)
         : false}
     </>
   );
