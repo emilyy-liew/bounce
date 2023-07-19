@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-
 import IconBar from "../components/IconBar";
-import { getData } from "./api/tasklists";
 
 import utilStyles from "../styles/utils.module.css";
 
