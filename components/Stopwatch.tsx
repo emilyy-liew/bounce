@@ -8,7 +8,7 @@ import { TaskItem } from "./Task";
 
 import styles from "../styles/Stopwatch.module.css";
 
-export default function Stopwatch({ task, onStopClick, onPlayClick }: {
+export default function Stopwatch(props: {
   task: TaskItem;
   onStopClick: (time: number, task: TaskItem) => void;
   onPlayClick: (task: TaskItem) => void;
@@ -18,8 +18,8 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
 
   useEffect(() => {
     let timer = setInterval(() => {
-        setIsRunning(task.isRunning);
-      }, 1000);
+      setIsRunning(props.task.isRunning);
+    }, 1000);
 
     return () => {
       clearInterval(timer);
@@ -40,7 +40,7 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
   }, [isRunning]);
 
   function handlePause() {
-    task.isRunning = false;
+    props.task.isRunning = false;
     setIsRunning(false);
   }
 
@@ -62,7 +62,7 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
         width={18}
         height={18}
         className={styles.button}
-        onClick={(event) => onPlayClick(task)}
+        onClick={(event) => props.onPlayClick(props.task)}
         alt="Start timer button"
       />
       <Image
@@ -80,7 +80,7 @@ export default function Stopwatch({ task, onStopClick, onPlayClick }: {
         className={styles.button}
         onClick={(event) => {
           handlePause();
-          onStopClick(time, task);
+          props.onStopClick(time, props.task);
           setTime(0);
         }}
         alt="Stop timer button"

@@ -7,7 +7,7 @@ import closeToggleImg from "../images/toggle_close.png";
 import styles from "../styles/Toggle.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-export default function Toggle({ children, label, length }: {
+export default function Toggle(props: {
   children: ReactNode;
   label: string;
   length: number;
@@ -29,10 +29,10 @@ export default function Toggle({ children, label, length }: {
         alt="expand toggle button"
       />
       <p onClick={handleOnClick} className={styles.p}>
-        {label}
+        {props.label}
         <span className={utilStyles.subtext}>({length})</span>
       </p>
-      {isVisible ? children : false}
+      {isVisible ? props.children : false}
     </div>
   );
 }

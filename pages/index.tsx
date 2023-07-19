@@ -1,12 +1,12 @@
 import { Amplify } from 'aws-amplify';
 import awsconfig from '../src/aws-exports';
-
 import { Authenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
 
-import utilSytles from "../styles/utils.module.css";
-import styles from "../styles/SignInPage.module.css";
 import ToDoPage from './ToDoPage';
+
+import styles from "../styles/SignInPage.module.css";
+import utilStyles from "../styles/utils.module.css";
+import '@aws-amplify/ui-react/styles.css';
 
 Amplify.configure(awsconfig);
 

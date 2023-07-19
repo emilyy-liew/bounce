@@ -1,6 +1,6 @@
-import Stopwatch from './Stopwatch';
+import Stopwatch from "./Stopwatch";
 
-import styles from '../styles/Task.module.css';
+import styles from "../styles/Task.module.css";
 
 export interface TaskItem {
   id: string;
@@ -13,21 +13,34 @@ export interface TaskItem {
   difference?: number;
 }
 
-export default function Task({ task, onCheckboxChange, onStopClick, onPlayClick }: { 
-    task: TaskItem;
-    onCheckboxChange: (task: TaskItem) => void;
-    onStopClick: (time: number, task: TaskItem) => void;
-    onPlayClick: (task: TaskItem) => void;
-  }) {
-  
+export default function Task(props: {
+  task: TaskItem;
+  onCheckboxChange: (task: TaskItem) => void;
+  onStopClick: (time: number, task: TaskItem) => void;
+  onPlayClick: (task: TaskItem) => void;
+}) {
   return (
     <div className={styles.container}>
-      <input className={styles.element} type="checkbox" id={task.id} onChange={() => onCheckboxChange(task)} defaultChecked={task.checked}/>
+      <input
+        className={styles.element}
+        type="checkbox"
+        id={props.task.id}
+        onChange={(event) => props.onCheckboxChange(props.task)}
+        defaultChecked={props.task.checked}
+      />
       <div className={styles.labelsContainer}>
-        <label className={styles.label}>{task.name}</label>
-        <label className={`${styles.label} ${styles.deadline}`}>{task.deadline}</label>
-        <label className={`${styles.label} ${styles.duration}`}>{task.today} min</label>
-        <Stopwatch task={task} onStopClick={onStopClick} onPlayClick={onPlayClick} />
+        <label className={styles.label}>{props.task.name}</label>
+        <label className={`${styles.label} ${styles.deadline}`}>
+          {props.task.deadline}
+        </label>
+        <label className={`${styles.label} ${styles.duration}`}>
+          {props.task.today} min
+        </label>
+        <Stopwatch
+          task={props.task}
+          onStopClick={props.onStopClick}
+          onPlayClick={props.onPlayClick}
+        />
       </div>
     </div>
   );

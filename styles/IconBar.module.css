@@ -1,21 +1,22 @@
 .button {
-  margin-right: 4px;
+  border-radius: 9999px;
+  margin-left: 10px;
+  margin-top: 4px;
 }
 
 .button:hover {
   cursor: pointer;
   border: solid 2px rgb(0, 153, 255);
-  border-radius: 9999px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   float: left;
-  width: 5%;
+  width: 68px;
   min-width: 36px;
   height: 100vh;
-  background-color: rgb(175, 110, 148);
+  background-color: rgb(233, 173, 160);
   margin-right: 10px;
   border-radius: 0 15px 15px 0;
   overflow-y: auto;
