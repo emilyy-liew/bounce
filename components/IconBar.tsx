@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import pause from "../images/pause.png";
 import rocket_ship from "../images/rocket_ship.png";
 import coming_soon from "../images/coming_soon.png";
 
