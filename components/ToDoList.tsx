@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import Task from "./Task";
 import { TaskItem } from "./Task";
 import Toggle from "./Toggle";
-import { getData } from "../pages/api/tasklists";
+import { getData, updateData, createNewUser } from "../pages/api/tasklists";
 
 import styles from "../styles/ToDoList.module.css";
 import utilStyles from "../styles/utils.module.css";
@@ -33,12 +33,26 @@ export default function ToDoList() {
           convertListToTaskList(data.Item.taskList.L.map((item) => item.M))
         );
       } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+        
+      };
 
-    fetchData();
+      fetchData();
+    }
   }, []);
+
+  useEffect(() => {
+    const update = async () => {
+      try {
+        await updateData("emilyliew", 'completed', convertTasklistToDB(completed));
+        await updateData("emilyliew", 'someday', convertTasklistToDB(someday));
+        await updateData("emilyliew", 'taskList', convertTasklistToDB(taskList));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    //update();
+  }, [completed, someday, taskList]);
 
   function convertListToTaskList(list) {
     return list.map((task) => {
@@ -49,6 +63,20 @@ export default function ToDoList() {
       task.isRunning = task.isRunning.BOOL;
       task.checked = task.checked.BOOL;
       return task;
+    });
+  }
+
+  function convertTasklistToDB(list) {
+    return list.map((task) => {
+      return {
+        M: {
+          id: {S: task.id},
+          name: {S: task.name},
+          deadline: {S: task.deadline},
+          duration: {N: (task.duration === undefined ? 0 : task.duration)},
+          isRunning: {BOOL: task.isRunning},
+          checked: {BOOL: task.checked}
+      }};
     });
   }
 

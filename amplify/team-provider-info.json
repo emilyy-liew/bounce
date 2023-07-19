@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bounce-dev-213447-authRole",
+      "UnauthRoleArn": "arn:aws:iam::726820468720:role/amplify-bounce-dev-213447-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::726820468720:role/amplify-bounce-dev-213447-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-bounce-dev-213447-deployment",
+      "UnauthRoleName": "amplify-bounce-dev-213447-unauthRole",
+      "StackName": "amplify-bounce-dev-213447",
+      "StackId": "arn:aws:cloudformation:eu-north-1:726820468720:stack/amplify-bounce-dev-213447/744c3570-25d4-11ee-9ad0-0e76a408223e",
+      "AmplifyAppId": "d2106htx4d0wok"
+    },
+    "categories": {
+      "auth": {
+        "bounce6bf57ba6": {}
+      }
+    }
+  }
+}

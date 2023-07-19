@@ -3,6 +3,9 @@
     "dev": "next dev"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^5.0.4",
+    "aws-amplify": "^5.3.4",
+    "aws-amplify-react": "^5.1.43",
     "next": "^13.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

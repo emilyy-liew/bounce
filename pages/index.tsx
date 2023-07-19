@@ -1,20 +1,26 @@
-import ToDoList from "../components/ToDoList";
-import IconBar from "../components/IconBar";
+import { Amplify } from 'aws-amplify';
+import awsconfig from '../src/aws-exports';
 
-import utilStyles from '../styles/utils.module.css';
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 
-function Header({ title }) {
-  return <h1>{title ? title : "Default title"}</h1>;
-}
+import utilSytles from "../styles/utils.module.css";
+import styles from "../styles/SignInPage.module.css";
+import ToDoPage from './ToDoPage';
 
-export default function HomePage() {
-  return (
-    <div className={utilStyles.rowStack}>
-      <IconBar />
-      <div className={utilStyles.columnStack}>
-        <Header title="Bounce. 🚀" />
-        <ToDoList />
-      </div>
-    </div>
-  );
+Amplify.configure(awsconfig);
+
+export default function Success() {
+
+    return (
+        <Authenticator>
+            {({ signOut, user }) => (
+                <main>
+                <h1>Hello {user.username}</h1>
+                <ToDoPage />
+                <button onClick={signOut}>Sign out</button>
+                </main>
+            )}
+        </Authenticator>
+    );
 }
