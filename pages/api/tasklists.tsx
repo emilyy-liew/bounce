@@ -13,31 +13,15 @@ export async function updateData(userID, attributeName, attributeValue) {
   const response = await fetch(`http://localhost:3001/data/${userID}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'text',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      attributeName,
-      attributeValue,
+      attributeName: attributeName,
+      attributeValue: attributeValue,
     }),
   });
 
   if (!response.ok) {
-    throw new Error('Failed to update data');
-  }
-}
-
-export async function createNewUser(userID) {
-  const response = await fetch(`http://localhost:3001/newUser`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'text'
-    },
-    body: JSON.stringify({
-      userID
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to create new user');
+    throw new Error('Failed to update data: ');
   }
 }

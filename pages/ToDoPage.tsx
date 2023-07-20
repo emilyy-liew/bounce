@@ -7,13 +7,13 @@ function Header({ title }) {
   return <h1>{title ? title : "Default title"}</h1>;
 }
 
-export default function ToDoPage() {
+export default function ToDoPage({ user, signOut}) {
   return (
     <div className={utilStyles.rowStack}>
       <IconBar />
       <div className={utilStyles.columnStack}>
         <Header title="Bounce. 🚀" />
-        <ToDoList />
+        <ToDoList user={user} signOut={signOut} />
       </div>
     </div>
   );

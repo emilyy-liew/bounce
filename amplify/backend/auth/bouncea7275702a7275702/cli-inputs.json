@@ -1,14 +1,14 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "bounce6bf57ba6_identitypool_6bf57ba6",
+    "identityPoolName": "bouncea7275702_identitypool_a7275702",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "bounce6bf57ba6",
-    "userPoolName": "bounce6bf57ba6_userpool_6bf57ba6",
+    "resourceNameTruncated": "bouncea7275702",
+    "userPoolName": "bouncea7275702_userpool_a7275702",
     "autoVerifiedAttributes": [
       "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
       "SMS Text Message"
     ],
@@ -31,17 +31,18 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "bounce6bf57ba6_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "bouncea7275702_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "6bf57ba6",
-    "resourceName": "bounce6bf57ba6",
+    "sharedId": "a7275702",
+    "resourceName": "bouncea7275702a7275702",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "defaultSocial",
-    "hostedUI": true,
-    "hostedUIDomainName": "bounce",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/ToDoPage/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
+    "useDefault": "manual",
+    "thirdPartyAuth": true,
+    "authProviders": [],
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": {},
+    "hostedUI": false,
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

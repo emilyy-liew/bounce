@@ -11,7 +11,7 @@ function Header({ title }) {
 
 export default function HomePage() {
   return (
-    <div className={`${utilStyles.rowStack} ${utilStyles.background}`}>
+    <div className={`${utilStyles.rowStack}`}>
       <IconBar />
       <div className={utilStyles.columnStack}>
         <Header title="Hello World. 🌎" />

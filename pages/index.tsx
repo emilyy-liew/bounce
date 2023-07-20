@@ -16,9 +16,8 @@ export default function Success() {
         <Authenticator>
             {({ signOut, user }) => (
                 <main>
-                <h1>Hello {user.username}</h1>
-                <ToDoPage />
-                <button onClick={signOut}>Sign out</button>
+                <ToDoPage user={user} signOut={signOut}/>
+                <button onClick={signOut}>Sign Out</button>
                 </main>
             )}
         </Authenticator>

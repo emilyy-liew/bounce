@@ -1,0 +1,10 @@
+{
+  "resourceName": "bounceData",
+  "tableName": "bounceData",
+  "partitionKey": {
+    "fieldName": "user_id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

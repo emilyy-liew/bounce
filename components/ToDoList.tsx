@@ -4,12 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 import Task from "./Task";
 import { TaskItem } from "./Task";
 import Toggle from "./Toggle";
-import { getData, updateData, createNewUser } from "../pages/api/tasklists";
+import { getData, updateData } from "../pages/api/tasklists";
 
 import styles from "../styles/ToDoList.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-export default function ToDoList() {
+export default function ToDoList({ user, signOut}) {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
   const [completed, setCompleted] = useState<TaskItem[]>([]);
   const [someday, setSomeday] = useState<TaskItem[]>([]);
@@ -18,67 +18,66 @@ export default function ToDoList() {
   const [duration, setDuration] = useState<number | undefined>(undefined);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [currentTask, setCurrentTask] = useState<TaskItem>(null);
+  const [dataInitialized, setDataInitialized] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getData("emilyliew");
-        setCompleted(
-          convertListToTaskList(data.Item.completed.L.map((item) => item.M))
-        );
-        setSomeday(
-          convertListToTaskList(data.Item.someday.L.map((item) => item.M))
-        );
-        setTaskList(
-          convertListToTaskList(data.Item.taskList.L.map((item) => item.M))
-        );
+        const data = await getData(user.username);
+        setCompleted(data.Item.completed);
+        setSomeday(data.Item.someday);
+        setTaskList(data.Item.taskList);
+        setDataInitialized(true);
       } catch (error) {
-        
+        console.log("Error: " + error);
       };
-
-      fetchData();
     }
+
+    fetchData();
   }, []);
 
   useEffect(() => {
     const update = async () => {
       try {
-        await updateData("emilyliew", 'completed', convertTasklistToDB(completed));
-        await updateData("emilyliew", 'someday', convertTasklistToDB(someday));
-        await updateData("emilyliew", 'taskList', convertTasklistToDB(taskList));
+        if (dataInitialized) {
+          await updateData(user.username, 'completed', completed);
+          await updateData(user.username, 'someday', someday);
+          await updateData(user.username, 'taskList', taskList);
+        }
       } catch (error) {
         console.log(error);
       }
     }
 
-    //update();
-  }, [completed, someday, taskList]);
+    update();
+  }, [dataInitialized, completed, someday, taskList]);
 
-  function convertListToTaskList(list) {
-    return list.map((task) => {
-      task.id = task.id.S;
-      task.name = task.taskName.S;
-      task.deadline = task.taskDeadline.S;
-      task.duration = task.taskDuration.N;
-      task.isRunning = task.isRunning.BOOL;
-      task.checked = task.checked.BOOL;
-      return task;
-    });
-  }
+  // function convertListToTaskList(list) {
+  //   return list.map((task) => {
+  //     task.id = task.id.S;
+  //     task.name = task.taskName.S;
+  //     task.deadline = task.taskDeadline.S;
+  //     task.duration = task.taskDuration.N;
+  //     task.isRunning = task.isRunning.BOOL;
+  //     task.checked = task.checked.BOOL;
+  //     return task;
+  //   });
+  // }
 
-  function convertTasklistToDB(list) {
-    return list.map((task) => {
-      return {
-        M: {
-          id: {S: task.id},
-          name: {S: task.name},
-          deadline: {S: task.deadline},
-          duration: {N: (task.duration === undefined ? 0 : task.duration)},
-          isRunning: {BOOL: task.isRunning},
-          checked: {BOOL: task.checked}
-      }};
-    });
-  }
+  // function convertTasklistToDB(list) {
+  //   return list.map((task) => {
+  //     return {
+  //       M: {
+  //         id: {S: task.id},
+  //         name: {S: task.name},
+  //         deadline: {S: task.deadline},
+  //         duration: {N: (task.duration === undefined ? 0 : task.duration)},
+  //         isRunning: {BOOL: task.isRunning},
+  //         checked: {BOOL: task.checked}
+  //     }};
+  //   });
+  // }
 
   useEffect(() => {
     const interval = setInterval(() => {
