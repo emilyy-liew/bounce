@@ -9,7 +9,12 @@ Clone this repo with
 **Windows:** `git clone https://github.com/emilyy-liew/bounce.git <directory name>`  
 **MacOS:** `git clone git@github.com:emilyy-liew/bounce.git <directory name>`
 
-Run `npm install`
+1. `npm install`  
+2. `npm install -g @aws-amplify/cli`  
+3. `npm i @aws-amplify/ui-react aws-amplify`  
+4. `amplify init`  
+5. `amplify configure` and follow instructions to enter relevant information.  
+6. `amplify push`  
 
 ## Running code locally
 
