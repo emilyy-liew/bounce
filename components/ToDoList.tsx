@@ -53,35 +53,10 @@ export default function ToDoList({ user, signOut}) {
     update();
   }, [dataInitialized, completed, someday, taskList]);
 
-  // function convertListToTaskList(list) {
-  //   return list.map((task) => {
-  //     task.id = task.id.S;
-  //     task.name = task.taskName.S;
-  //     task.deadline = task.taskDeadline.S;
-  //     task.duration = task.taskDuration.N;
-  //     task.isRunning = task.isRunning.BOOL;
-  //     task.checked = task.checked.BOOL;
-  //     return task;
-  //   });
-  // }
-
-  // function convertTasklistToDB(list) {
-  //   return list.map((task) => {
-  //     return {
-  //       M: {
-  //         id: {S: task.id},
-  //         name: {S: task.name},
-  //         deadline: {S: task.deadline},
-  //         duration: {N: (task.duration === undefined ? 0 : task.duration)},
-  //         isRunning: {BOOL: task.isRunning},
-  //         checked: {BOOL: task.checked}
-  //     }};
-  //   });
-  // }
-
   useEffect(() => {
     const interval = setInterval(() => {
       const newDate = new Date();
+
       if (newDate.getDate() !== currentDate.getDate()) {
         setCompleted([]);
       }
