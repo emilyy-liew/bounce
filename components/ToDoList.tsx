@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { AuthEventData, AmplifyUser } from "@aws-amplify/ui-react/node_modules/@aws-amplify/ui";
 
 import Task from "./Task";
 import { TaskItem } from "./Task";
 import Toggle from "./Toggle";
-import { getData, updateData } from "../pages/api/tasklists";
+import { getData, updateData } from "../functions/serverRequests";
 
 import styles from "../styles/ToDoList.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-export default function ToDoList({ user, signOut}) {
+export default function ToDoList(props: {
+  user: AmplifyUser;
+}) {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
   const [completed, setCompleted] = useState<TaskItem[]>([]);
   const [someday, setSomeday] = useState<TaskItem[]>([]);
@@ -20,19 +23,18 @@ export default function ToDoList({ user, signOut}) {
   const [currentTask, setCurrentTask] = useState<TaskItem>(null);
   const [dataInitialized, setDataInitialized] = useState(false);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getData(user.username);
+        const data = await getData(props.user.username);
         setCompleted(data.Item.completed);
         setSomeday(data.Item.someday);
         setTaskList(data.Item.taskList);
         setDataInitialized(true);
       } catch (error) {
         console.log("Error: " + error);
-      };
-    }
+      }
+    };
 
     fetchData();
   }, []);
@@ -41,14 +43,14 @@ export default function ToDoList({ user, signOut}) {
     const update = async () => {
       try {
         if (dataInitialized) {
-          await updateData(user.username, 'completed', completed);
-          await updateData(user.username, 'someday', someday);
-          await updateData(user.username, 'taskList', taskList);
+          await updateData(props.user.username, "completed", completed);
+          await updateData(props.user.username, "someday", someday);
+          await updateData(props.user.username, "taskList", taskList);
         }
       } catch (error) {
         console.log(error);
       }
-    }
+    };
 
     update();
   }, [dataInitialized, completed, someday, taskList]);

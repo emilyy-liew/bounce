@@ -1,10 +1,7 @@
 import IconBar from "../components/IconBar";
+import Header from "../components/Header";
 
 import utilStyles from "../styles/utils.module.css";
-
-function Header({ title }) {
-  return <h1>{title ? title : "Default title"}</h1>;
-}
 
 export default function HomePage() {
   return (
