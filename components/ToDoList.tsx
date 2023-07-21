@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { AuthEventData, AmplifyUser } from "@aws-amplify/ui-react/node_modules/@aws-amplify/ui";
 
 import Task from "./Task";
 import { TaskItem } from "./Task";
@@ -11,7 +10,7 @@ import styles from "../styles/ToDoList.module.css";
 import utilStyles from "../styles/utils.module.css";
 
 export default function ToDoList(props: {
-  user: AmplifyUser;
+  user: any;
 }) {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
   const [completed, setCompleted] = useState<TaskItem[]>([]);
