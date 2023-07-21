@@ -30,7 +30,7 @@ export default function Toggle(props: {
       />
       <p onClick={handleOnClick} className={styles.p}>
         {props.label}
-        <span className={utilStyles.subtext}>({length})</span>
+        <span className={utilStyles.subtext}>({props.length})</span>
       </p>
       {isVisible ? props.children : false}
     </div>
