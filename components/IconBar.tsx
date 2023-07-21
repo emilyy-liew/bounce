@@ -7,9 +7,7 @@ import sign_out from "../images/sign_out.png";
 
 import styles from "../styles/IconBar.module.css";
 
-export default function IconBar(props: {
-  signOut: any;
-}) {
+export default function IconBar(props: { signOut: any }) {
   const buttonSize = 48;
 
   return (
