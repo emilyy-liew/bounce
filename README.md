@@ -1,7 +1,7 @@
 # bounce
 
 ![bounce](images/bounce.png)  
-Current version of [bounce](https://bounce-emilyy-liew.vercel.app/)
+Current version of [bounce](https://main.d2ngor7ea7fphp.amplifyapp.com/)
 
 ## Set up
 
