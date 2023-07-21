@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { AuthEventData, AmplifyUser } from "@aws-amplify/ui-react/node_modules/@aws-amplify/ui";
+import { AmplifyUser } from "@aws-amplify/ui-react/node_modules/@aws-amplify/ui";
 
 import Task from "./Task";
 import { TaskItem } from "./Task";
