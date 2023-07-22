@@ -17,12 +17,11 @@ export default function Success() {
       {({ signOut, user }) => (
         <main>
             <div className={utilStyles.rowStack}>
-                <IconBar signOut={signOut} />
-
                 <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
                     <Header title="Bounce. 🚀" />
                     <ToDoList user={user} />
                 </div>
+                <IconBar signOut={signOut} />
           </div>
         </main>
       )}

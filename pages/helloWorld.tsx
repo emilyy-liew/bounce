@@ -10,9 +10,9 @@ export default function HomePage() {
   return (
     <Authenticator>
       {({ signOut }) => (
-        <div className={`${utilStyles.rowStack}`}>
-          <IconBar signOut={signOut} />
-          <div className={utilStyles.columnStack}>
+        <div className={utilStyles.rowStack}>
+          <IconBar signOut={signOut}/>
+          <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
             <Header title="Hello World. 🌎" />
           </div>
         </div>
