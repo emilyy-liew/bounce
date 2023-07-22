@@ -29,13 +29,18 @@ export default function Task(props: {
         defaultChecked={props.task.checked}
       />
       <div className={styles.labelsContainer}>
-        <label className={styles.label}>{props.task.name}</label>
+        <label className={styles.label}>
+          {props.task.name}
+        </label>
+
         <label className={`${styles.label} ${styles.deadline}`}>
           {props.task.deadline}
         </label>
+
         <label className={`${styles.label} ${styles.duration}`}>
           {props.task.today} min
         </label>
+        
         <Stopwatch
           task={props.task}
           onStopClick={props.onStopClick}

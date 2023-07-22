@@ -1,0 +1,22 @@
+.icon {
+  float: left;
+  margin-right: 4px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.p:hover {
+  cursor: pointer;
+}
+
+.collapsibleContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.visible {
+  max-height: 1000px;
+}
