@@ -9,9 +9,7 @@ import { getData, updateData } from "../functions/serverRequests";
 import styles from "../styles/ToDoList.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-export default function ToDoList(props: {
-  user: any;
-}) {
+export default function ToDoList(props: { user: any }) {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
   const [completed, setCompleted] = useState<TaskItem[]>([]);
   const [someday, setSomeday] = useState<TaskItem[]>([]);
