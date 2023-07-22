@@ -3,10 +3,9 @@ import awsconfig from "../src/aws-exports";
 import { Authenticator } from "@aws-amplify/ui-react";
 
 import ToDoList from "../components/ToDoList";
-import IconBar from "../components/IconBar";
+import Layout from "../components/Layout";
 import Header from "../components/Header";
 
-import utilStyles from "../styles/utils.module.css";
 import "@aws-amplify/ui-react/styles.css";
 
 Amplify.configure(awsconfig);
@@ -15,15 +14,10 @@ export default function Success() {
   return (
     <Authenticator>
       {({ signOut, user }) => (
-        <main>
-            <div className={utilStyles.rowStack}>
-                <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
-                    <Header title="Bounce. 🚀" />
-                    <ToDoList user={user} />
-                </div>
-                <IconBar signOut={signOut} />
-          </div>
-        </main>
+        <Layout signOut={signOut}>
+            <Header title="Bounce. 🚀" />
+            <ToDoList user={user} />
+        </Layout>
       )}
     </Authenticator>
   );
