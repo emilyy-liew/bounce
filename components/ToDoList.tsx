@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import Task from "./Task";
 import { TaskItem } from "./Task";
-import Toggle from "./Toggle";
+import Collapsible from "./Collapsible";
 import { getData, updateData } from "../functions/serverRequests";
 
 import styles from "../styles/ToDoList.module.css";
@@ -164,7 +164,7 @@ export default function ToDoList(props: { user: any }) {
   function renderList(list: TaskItem[], label: string, length: number) {
     return (
       <div className={styles.container}>
-        <Toggle
+        <Collapsible
           label={label}
           length={length}
           children={list.map((task) => (
