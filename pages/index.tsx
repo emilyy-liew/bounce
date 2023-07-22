@@ -16,13 +16,13 @@ export default function Success() {
     <Authenticator>
       {({ signOut, user }) => (
         <main>
-          <div className={utilStyles.rowStack}>
-            <IconBar signOut={signOut} />
+            <div className={utilStyles.rowStack}>
+                <IconBar signOut={signOut} />
 
-            <div className={utilStyles.columnStack}>
-              <Header title="Bounce. 🚀" />
-              <ToDoList user={user} />
-            </div>
+                <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
+                    <Header title="Bounce. 🚀" />
+                    <ToDoList user={user} />
+                </div>
           </div>
         </main>
       )}
