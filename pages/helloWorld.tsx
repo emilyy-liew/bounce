@@ -10,7 +10,7 @@ export default function HomePage() {
     <Authenticator>
       {({ signOut }) => (
         <Layout signOut={signOut}>
-          <Header title="Hello World. 🌎" />
+          <Header title="Update dependencies. 🌎" />
         </Layout>
       )}
     </Authenticator>

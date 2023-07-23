@@ -4,11 +4,7 @@
     "build": "next build"
   },
   "dependencies": {
-    "@aws-amplify/auth": "^5.5.5",
-    "@aws-amplify/core": "^5.7.0",
-    "@aws-amplify/storage": "^5.8.0",
     "@aws-amplify/ui-react": "^5.0.5",
-    "@aws-sdk/util-utf8-browser": "^3.259.0",
     "next": "^13.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
