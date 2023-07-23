@@ -22,7 +22,7 @@ export default function Layout({ children, signOut }) {
           >
             Bounce July 22, 2023 Version:
           </a>
-          {" "} Added this text and updated rocket ship icon to fit entire image.
+          {" "} Update task to save timer.
         </div>
       </div>
     </main>
