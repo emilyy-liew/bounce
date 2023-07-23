@@ -20,6 +20,7 @@
   border-radius: 0 15px 15px 0;
   overflow-y: auto;
   position: fixed;
+  float:left;
 }
 
 .link {
