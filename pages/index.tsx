@@ -2,7 +2,7 @@ import { Amplify } from "aws-amplify";
 import awsconfig from "../src/aws-exports";
 import { Authenticator } from "@aws-amplify/ui-react";
 
-import ToDoList from "../components/ToDoList";
+import ToDoList from "../components/todo/ToDoList";
 import Layout from "../components/Layout";
 import { Header } from "../components/Headers";
 

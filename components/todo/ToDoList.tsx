@@ -6,7 +6,7 @@ import moment from 'moment';
 import Task from "./Task";
 import { TaskItem } from "./Task";
 import Collapsible from "./Collapsible";
-import { getData, updateData } from "../functions/serverRequests";
+import { getData, updateData } from "../../functions/serverRequests";
 
 import styles from "../styles/ToDoList.module.css";
 import utilStyles from "../styles/utils.module.css";
@@ -311,6 +311,8 @@ export default function ToDoList(props: { user: any }) {
           startAccessor="start"
           endAccessor="end"
           titleAccessor="title"
+          step={15}
+          timeslots={4}
           />
       
       </div>
