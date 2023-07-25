@@ -4,7 +4,7 @@ import Link from "next/link";
 import rocket_ship from "../images/rocket_ship.png";
 import cooking from "../images/cooking.png";
 import coming_soon from "../images/coming_soon.png";
-import sign_out from "../images/sign_out.png";
+import updates_log from "../images/updates_log.png";
 
 import styles from "../styles/IconBar.module.css";
 
@@ -31,17 +31,17 @@ export default function IconBar(props: { signOut: any }) {
           alt="Recipes!"
         />
       </Link>
-      <Link href="/helloWorld" className={styles.link}>
+      <Link href="/updatesLog" className={styles.link}>
         <Image
           src={coming_soon}
           width={buttonSize}
           height={buttonSize}
           className={styles.button}
-          alt="Coming Soon!"
+          alt="Updates Log"
         />
       </Link>
       <Image
-        src={sign_out}
+        src={updates_log}
         width={buttonSize}
         height={buttonSize}
         className={styles.button}

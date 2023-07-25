@@ -313,11 +313,8 @@ export default function ToDoList(props: { user: any }) {
           titleAccessor="title"
           step={15}
           timeslots={4}
-          />
-      
+        />
       </div>
-      
-
     </>
   );
 }

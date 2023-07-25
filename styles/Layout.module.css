@@ -8,6 +8,7 @@
   color: rgb(85, 85, 85);
 }
 
-.underlinedText {
+.link {
   text-decoration: underline;
+  color: rgb(85, 85, 85);
 }
