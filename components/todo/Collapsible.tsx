@@ -4,8 +4,8 @@ import Image from "next/image";
 import expandedImg from "../../images/expanded.png";
 import collapsedImg from "../../images/collapsed.png";
 
-import styles from "../styles/Collapsible.module.css";
-import utilStyles from "../styles/utils.module.css";
+import styles from "../../styles/Collapsible.module.css";
+import utilStyles from "../../styles/utils.module.css";
 
 export default function Collapsible(props: {
   children: ReactNode;

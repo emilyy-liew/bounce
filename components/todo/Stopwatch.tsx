@@ -6,7 +6,7 @@ import pause from "../images/pause.png";
 import stop from "../images/stop.png";
 import { TaskItem } from "./Task";
 
-import styles from "../styles/Stopwatch.module.css";
+import styles from "../../styles/Stopwatch.module.css";
 
 export default function Stopwatch(props: {
   task: TaskItem;
