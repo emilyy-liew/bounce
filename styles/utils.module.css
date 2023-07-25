@@ -12,8 +12,19 @@
 .rowStack {
   display: flex;
   flex-direction: row;
+  margin: 0px;
 }
 
+.rowEvenSpace {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.justifyCenter {
+  display: flex;
+  justify-content: center;
+}
 .reverseRowStack {
   display: flex;
   flex-direction: row-reverse;

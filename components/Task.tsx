@@ -11,6 +11,7 @@ export interface TaskItem {
   checked: boolean;
   today?: number;
   difference?: number;
+  time: number;
 }
 
 export default function Task(props: {
@@ -18,6 +19,7 @@ export default function Task(props: {
   onCheckboxChange: (task: TaskItem) => void;
   onStopClick: (time: number, task: TaskItem) => void;
   onPlayClick: (task: TaskItem) => void;
+  onPauseClick: (time: number, task: TaskItem) => void;
 }) {
   return (
     <div className={styles.container}>
@@ -45,6 +47,7 @@ export default function Task(props: {
           task={props.task}
           onStopClick={props.onStopClick}
           onPlayClick={props.onPlayClick}
+          onPauseClick={props.onPauseClick}
         />
       </div>
     </div>

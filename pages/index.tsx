@@ -4,9 +4,7 @@ import { Authenticator } from "@aws-amplify/ui-react";
 
 import ToDoList from "../components/ToDoList";
 import Layout from "../components/Layout";
-import Header from "../components/Header";
-
-import "@aws-amplify/ui-react/styles.css";
+import { Header } from "../components/Headers";
 
 Amplify.configure(awsconfig);
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from 'moment';
 
 import Task from "./Task";
 import { TaskItem } from "./Task";
@@ -8,6 +10,9 @@ import { getData, updateData } from "../functions/serverRequests";
 
 import styles from "../styles/ToDoList.module.css";
 import utilStyles from "../styles/utils.module.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
+const localizer = momentLocalizer(moment)
 
 export default function ToDoList(props: { user: any }) {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
@@ -15,7 +20,7 @@ export default function ToDoList(props: { user: any }) {
   const [someday, setSomeday] = useState<TaskItem[]>([]);
   const [name, setName] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
-  const [duration, setDuration] = useState<number | undefined>(undefined);
+  const [duration, setDuration] = useState<number | null>(null);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [currentTask, setCurrentTask] = useState<TaskItem>(null);
   const [dataInitialized, setDataInitialized] = useState(false);
@@ -35,7 +40,6 @@ export default function ToDoList(props: { user: any }) {
 
     fetchData();
   }, []);
-
   useEffect(() => {
     const update = async () => {
       try {
@@ -116,6 +120,7 @@ export default function ToDoList(props: { user: any }) {
         duration: duration === undefined || duration < 0 ? 0 : duration,
         isRunning: false,
         checked: false,
+        time: 0
       };
 
       if (deadline === "") {
@@ -130,7 +135,7 @@ export default function ToDoList(props: { user: any }) {
       }
       setName("");
       setDeadline("");
-      setDuration(undefined);
+      setDuration(null);
     }
   }
 
@@ -174,6 +179,7 @@ export default function ToDoList(props: { user: any }) {
               onCheckboxChange={(task) => handleCheckboxClick(task)}
               onStopClick={handleStop}
               onPlayClick={() => handlePlay(task)}
+              onPauseClick={handlePause}
             />
           ))}
         />
@@ -218,9 +224,39 @@ export default function ToDoList(props: { user: any }) {
     }
   }
 
+  function handlePause(time: number, task: TaskItem) {
+    task.isRunning = false;
+    if (taskList.includes(task)) {
+      let newTaskList = taskList.slice();
+      for (let i = 0; i < newTaskList.length; i++) {
+        if (newTaskList[i].id === task.id) {
+          newTaskList[i].time = time;
+        }
+      }
+      setTaskList(newTaskList);
+    } else if (someday.includes(task)) {
+      let newSomeday = someday.slice();
+      for (let i = 0; i < newSomeday.length; i++) {
+        if (newSomeday[i].id === task.id) {
+          newSomeday[i].time = time;
+        }
+      }
+      setSomeday(newSomeday);
+    } else {
+      let newCompleted = completed.slice();
+      for (let i = 0; i < newCompleted.length; i++) {
+        if (newCompleted[i].id === task.id) {
+          newCompleted[i].time = time;
+        }
+      }
+      setCompleted(newCompleted);
+    }
+    
+  }
+
   return (
     <>
-      <div className={utilStyles.rowStack}>
+      <div className={utilStyles.justifyCenter}>
         <input
           type="text"
           placeholder="Enter task"
@@ -243,29 +279,43 @@ export default function ToDoList(props: { user: any }) {
           value={duration}
           onChange={(event) => handleChange(event, setDuration)}
           onKeyDown={(event) => handleKeyDown(event)}
-          className={styles.textInput}
+          className={styles.number}
         />
       </div>
+      <div className={utilStyles.rowEvenSpace}>
+        <div className={`${utilStyles.columnStack} ${styles.tasks}`}>
+          {completed.length > 0
+            ? renderList(completed, "Completed", completed.length)
+            : false}
 
-      {completed.length > 0
-        ? renderList(completed, "Completed", completed.length)
-        : false}
+          {categories.map((tasks, index) => {
+            if (index && tasks !== undefined) {
+              return renderList(
+                tasks,
+                `${index} ${index === 1 ? "day" : "days"} left`,
+                tasks.length
+              );
+            } else {
+              return renderList(tasks, `0 days left`, tasks.length);
+            }
+          })}
 
-      {categories.map((tasks, index) => {
-        if (index && tasks !== undefined) {
-          return renderList(
-            tasks,
-            `${index} ${index === 1 ? "day" : "days"} left`,
-            tasks.length
-          );
-        } else {
-          return renderList(tasks, `0 days left`, tasks.length);
-        }
-      })}
+          {someday.length > 0
+            ? renderList(someday, "Someday", someday.length)
+            : false}
+        </div>
+        <Calendar 
+          className={styles.calendar}
+          localizer={localizer}
+          events={[]}
+          startAccessor="start"
+          endAccessor="end"
+          titleAccessor="title"
+          />
+      
+      </div>
+      
 
-      {someday.length > 0
-        ? renderList(someday, "Someday", someday.length)
-        : false}
     </>
   );
 }

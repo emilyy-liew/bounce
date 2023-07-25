@@ -12,8 +12,9 @@ export default function Stopwatch(props: {
   task: TaskItem;
   onStopClick: (time: number, task: TaskItem) => void;
   onPlayClick: (task: TaskItem) => void;
+  onPauseClick: (time: number, task: TaskItem) => void;
 }) {
-  const [time, setTime] = useState<number>(0);
+  const [time, setTime] = useState<number>(props.task.time);
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
   useEffect(() => {
@@ -38,11 +39,6 @@ export default function Stopwatch(props: {
       clearInterval(timer);
     };
   }, [isRunning]);
-
-  function handlePause() {
-    props.task.isRunning = false;
-    setIsRunning(false);
-  }
 
   const formatTime = (time) => {
     const hours = Math.floor(time / 3600);
@@ -70,7 +66,7 @@ export default function Stopwatch(props: {
         width={18}
         height={18}
         className={styles.button}
-        onClick={(event) => handlePause()}
+        onClick={(event) => props.onPauseClick(time, props.task)}
         alt="Pause timer button"
       />
       <Image
@@ -79,7 +75,7 @@ export default function Stopwatch(props: {
         height={18}
         className={styles.button}
         onClick={(event) => {
-          handlePause();
+          props.onPauseClick(time, props.task);
           props.onStopClick(time, props.task);
           setTime(0);
         }}
