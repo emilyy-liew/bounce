@@ -8,8 +8,8 @@ import { TaskItem } from "./Task";
 import Collapsible from "./Collapsible";
 import { getData, updateData } from "../../functions/serverRequests";
 
-import styles from "../styles/ToDoList.module.css";
-import utilStyles from "../styles/utils.module.css";
+import styles from "../../styles/ToDoList.module.css";
+import utilStyles from "../../styles/utils.module.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment)
