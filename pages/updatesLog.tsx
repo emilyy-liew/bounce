@@ -3,7 +3,7 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import Layout from "../components/Layout";
 import { Header } from "../components/Headers";
 
-export const updatesText = "Update Authentication";
+export const updatesText = "Update Photos path";
 
 export default function HomePage() {
   return (
