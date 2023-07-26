@@ -2,8 +2,8 @@ import { getIngredients } from "../../functions/serverRequests";
 import Dropdown from "../Dropdown";
 import Ingredient, { IngredientItem } from "./Ingredient";
 
-import utilStyles from "../styles/utils.module.css";
-import styles from "../styles/recipes.module.css";
+import utilStyles from "../../styles/utils.module.css";
+import styles from "../../styles/recipes.module.css";
 import { useEffect, useState } from "react";
 
 export default function Inventory() {
