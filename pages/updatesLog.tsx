@@ -1,9 +1,7 @@
 import { Header } from "../components/Headers";
 
-export const updatesText = "Update directory structure";
+export const updatesText = "Clean Code";
 
 export default function UpdateLog() {
-  return (
-    <Header title={updatesText}/>
-  );
+  return <Header title={updatesText} />;
 }

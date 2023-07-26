@@ -1,7 +1,7 @@
-import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
-import awsconfig from "../src/aws-exports";
+import { Authenticator } from "@aws-amplify/ui-react";
 
+import awsconfig from "../src/aws-exports";
 import Layout from "../components/Layout";
 
 import "../styles/global.css";
@@ -11,12 +11,12 @@ Amplify.configure(awsconfig);
 
 export default function App({ Component, pageProps }) {
   return (
-      <Authenticator>
-        {({ signOut, user }) => (
-          <Layout signOut={signOut}>
-            <Component user={user} {...pageProps} />
-          </Layout>
-        )}
-      </Authenticator>
-    );
+    <Authenticator>
+      {({ signOut, user }) => (
+        <Layout signOut={signOut}>
+          <Component user={user} {...pageProps} />
+        </Layout>
+      )}
+    </Authenticator>
+  );
 }

@@ -13,19 +13,18 @@ export default function Layout({ children, signOut }) {
         <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
           {children}
         </div>
-        
       </div>
       <div className={styles.updateText}>
-          <a
-            href="https://github.com/emilyy-liew/bounce/tree/main"
-            target="_blank" /* Opens the link in a new tab */
-            rel="noopener noreferrer" /* Recommended for security */
-            className={styles.link}
-          >
-            Bounce July 25, 2023 Version:
-          </a>
-          {" " + updatesText}
-        </div>
+        <a
+          href="https://github.com/emilyy-liew/bounce/tree/main"
+          target="_blank" /* Opens the link in a new tab */
+          rel="noopener noreferrer" /* Recommended for security */
+          className={styles.link}
+        >
+          Bounce July 26, 2023 Version:
+        </a>
+        {" " + updatesText}
+      </div>
     </main>
   );
 }
