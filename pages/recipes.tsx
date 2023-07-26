@@ -74,22 +74,6 @@ export default function Recipes() {
               })}
             />
             <button onClick={handleAddClick}>Add</button>
-            {/* <input
-              type="date"
-              value={deadline}
-              onChange={(event) => handleChange(event, setDeadline)}
-              onKeyDown={(event) => handleKeyDown(event)}
-              className={styles.dateInput}
-              />
-              <input
-              type="number"
-              placeholder="Enter task duration in mins"
-              min="0"
-              value={duration}
-              onChange={(event) => handleChange(event, setDuration)}
-              onKeyDown={(event) => handleKeyDown(event)}
-              className={styles.number}
-              /> */}
           </div>
           {renderIngredients()}
           <Subheader1 title="Recipes." />

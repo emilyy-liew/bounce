@@ -285,8 +285,8 @@ export default function ToDoList(props: { user: any }) {
       <div className={utilStyles.rowEvenSpace}>
         <div className={`${utilStyles.columnStack} ${styles.tasks}`}>
           {completed.length > 0
-            ? renderList(completed, "Completed", completed.length)
-            : false}
+            && renderList(completed, "Completed", completed.length)
+            }
 
           {categories.map((tasks, index) => {
             if (index && tasks !== undefined) {
@@ -301,8 +301,8 @@ export default function ToDoList(props: { user: any }) {
           })}
 
           {someday.length > 0
-            ? renderList(someday, "Someday", someday.length)
-            : false}
+            && renderList(someday, "Someday", someday.length)
+            }
         </div>
         <Calendar 
           className={styles.calendar}
