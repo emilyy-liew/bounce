@@ -3,16 +3,10 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import Layout from "../components/Layout";
 import { Header } from "../components/Headers";
 
-export const updatesText = "Delete index.html";
+export const updatesText = "Update Authentication and IconBar globally";
 
-export default function HomePage() {
+export default function UpdateLog() {
   return (
-    <Authenticator>
-      {({ signOut }) => (
-        <Layout signOut={signOut}>
-          <Header title={updatesText}/>
-        </Layout>
-      )}
-    </Authenticator>
+    <Header title={updatesText}/>
   );
 }
