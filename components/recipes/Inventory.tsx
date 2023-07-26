@@ -1,5 +1,5 @@
 import { getIngredients } from "../../functions/serverRequests";
-import Dropdown from "../Dropdown";
+import Dropdown, { OptionItem } from "../Dropdown";
 import Ingredient, { IngredientItem } from "./Ingredient";
 
 import utilStyles from "../../styles/utils.module.css";
@@ -9,12 +9,9 @@ import { useEffect, useState } from "react";
 export default function Inventory() {
   const [ingredients, setIngredients] = useState<IngredientItem[]>([]);
   const [myIngredients, setMyIngredients] = useState<IngredientItem[]>([]);
-  const [selected, setSelected] = useState<{ label: string; value: string }[]>([]);
+  const [selected, setSelected] = useState<OptionItem[]>([]);
 
-  const handleSelectChange = (selectedOptions: {
-    label: string;
-    value: string;
-  }[]) => {
+  const handleSelectChange = (selectedOptions: OptionItem[]) => {
     setSelected(selectedOptions);
   };
 

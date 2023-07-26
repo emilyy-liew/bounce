@@ -1,8 +1,7 @@
-
 export interface IngredientItem {
-    ingredient: string,
-    amount: number,
-    measure: string
+  ingredient: string;
+  amount: number;
+  measure: string;
 }
 
 // enum Measures {
@@ -13,17 +12,14 @@ export interface IngredientItem {
 //     unit
 //   }
 
-export default function Ingredient(props: {
-    ingredient: IngredientItem
-}) {
-
-    return (
-        <div>
-            <label>{props.ingredient.ingredient}</label>
-            <button>Minus</button>
-            <input type="number" value={props.ingredient.amount} />
-            <button>Plus</button>
-            <p>{props.ingredient.measure}</p>
-        </div>
-    )
+export default function Ingredient(props: { ingredient: IngredientItem }) {
+  return (
+    <div>
+      <label>{props.ingredient.ingredient}</label>
+      <button>Minus</button>
+      <input type="number" value={props.ingredient.amount} />
+      <button>Plus</button>
+      <p>{props.ingredient.measure}</p>
+    </div>
+  );
 }
