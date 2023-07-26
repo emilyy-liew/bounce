@@ -10,7 +10,7 @@ import utilStyles from "../styles/utils.module.css";
 import styles from "../styles/recipes.module.css";
 import { useEffect, useState } from "react";
 
-export default function Recipes() {
+export default function Recipes({ user }) {
   const [ingredients, setIngredients] = useState([]);
   const [myIngredients, setMyIngredients] = useState<IngredientItem[]>([]);
   const [selected, setSelected] = useState<{ label: string; value: string }[]>([]);
@@ -57,29 +57,25 @@ export default function Recipes() {
   }
 
   return (
-    <Authenticator>
-      {({ signOut, user }) => (
-        <Layout signOut={signOut}>
-          <Header title="Recipes. 🥘" />
-          <Subheader1 title="Inventory." />
-          <div className={utilStyles.rowStack}>
-            <Dropdown
-              selected={selected}
-              handleSelectChange={handleSelectChange}
-              optionsList={ingredients.map((item) => {
-                return {
-                  label: item.ingredient,
-                  value: item.ingredient,
-                };
-              })}
-            />
-            <button onClick={handleAddClick}>Add</button>
-          </div>
-          {renderIngredients()}
-          <Subheader1 title="Recipes." />
-          <Subheader1 title="Grocery List." />
-        </Layout>
-      )}
-    </Authenticator>
+        <div>
+            <Header title="Recipes. 🥘" />
+            <Subheader1 title="Inventory." />
+            <div className={utilStyles.rowStack}>
+                <Dropdown
+                    selected={selected}
+                    handleSelectChange={handleSelectChange}
+                    optionsList={ingredients.map((item) => {
+                        return {
+                        label: item.ingredient,
+                        value: item.ingredient,
+                        };
+                    })}
+                    />
+                <button onClick={handleAddClick}>Add</button>
+            </div>
+            {renderIngredients()}
+            <Subheader1 title="Recipes." />
+            <Subheader1 title="Grocery List." />
+        </div>
   );
 }
