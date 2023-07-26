@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import rocket_ship from "../images/rocket_ship.png";
-import cooking from "../images/cooking.png";
-import updates_log from "../images/updates_log.png";
-import sign_out from "../images/sign_out.png";
+import rocket_ship from "../public/images/rocket_ship.png";
+import cooking from "../public/images/cooking.png";
+import updates_log from "../public/images/updates_log.png";
+import sign_out from "../public/images/sign_out.png";
 
 import styles from "../styles/IconBar.module.css";
 
