@@ -60,10 +60,10 @@ export default function Inventory() {
                     handleSelectChange={handleSelectChange}
                     optionsList={ingredients.map((item) => {
                         return {
-                        label: item.ingredient,
-                        value: item.ingredient,
+                          label: item.ingredient,
+                          value: item.ingredient,
                         };
-                    })}
+                    }).filter((item) => !myIngredients.some((ingredient) => item.label === ingredient.ingredient))}
                     />
                 <button onClick={handleAddClick}>Add</button>
             </div>
