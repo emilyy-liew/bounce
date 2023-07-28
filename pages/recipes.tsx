@@ -18,9 +18,9 @@ export default function RecipeDashboardPage(props: { user: any }) {
         setMyIngredients={setMyIngredients}
         ingredients={ingredients}
         setIngredients={setIngredients}
-        />
+      />
       <Subheader1 title="Recipes." />
-      <RecipeList myIngredients={myIngredients} ingredients={ingredients}/>
+      <RecipeList myIngredients={myIngredients} ingredients={ingredients} />
       <Subheader1 title="Grocery List." />
     </div>
   );

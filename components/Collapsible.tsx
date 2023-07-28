@@ -31,7 +31,11 @@ export default function Collapsible(props: {
       <p onClick={handleOnClick} className={styles.p}>
         {props.label}
       </p>
-      <div className={`${styles.collapsibleContent} ${isVisible && styles.visible}`}>
+      <div
+        className={`${styles.collapsibleContent} ${
+          isVisible && styles.visible
+        }`}
+      >
         {props.children}
       </div>
     </div>

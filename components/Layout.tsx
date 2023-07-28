@@ -20,7 +20,7 @@ export default function Layout({ children, signOut }) {
           rel="noopener noreferrer" /* Recommended for security */
           className={styles.link}
         >
-          Bounce July 26, 2023 Version:
+          Bounce July 28, 2023 Version:
         </a>
         {" " + updatesText}
       </div>

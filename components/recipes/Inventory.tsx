@@ -1,12 +1,17 @@
+import { useEffect, useState } from "react";
+
 import { getIngredients } from "../../functions/serverRequests";
 import Dropdown, { OptionItem } from "../Dropdown";
 import Ingredient, { IngredientItem } from "./Ingredient";
 
 import utilStyles from "../../styles/utils.module.css";
-import styles from "../../styles/recipes.module.css";
-import { useEffect, useState } from "react";
 
-export default function Inventory(props: {myIngredients: IngredientItem[], setMyIngredients, ingredients: IngredientItem[], setIngredients}) {
+export default function Inventory(props: {
+  myIngredients: IngredientItem[];
+  setMyIngredients;
+  ingredients: IngredientItem[];
+  setIngredients;
+}) {
   const [selected, setSelected] = useState<OptionItem[]>([]);
 
   const handleSelectChange = (selectedOptions: OptionItem[]) => {
@@ -45,38 +50,53 @@ export default function Inventory(props: {myIngredients: IngredientItem[], setMy
 
   function handlePlusClick(ingredient: IngredientItem) {
     const newMyIngredients = props.myIngredients.slice();
-    newMyIngredients.find((item) => item.ingredient === ingredient.ingredient).amount++;
+    newMyIngredients.find((item) => item.ingredient === ingredient.ingredient)
+      .amount++;
     props.setMyIngredients(newMyIngredients);
   }
 
   function handleMinusClick(ingredient: IngredientItem) {
     if (ingredient.amount > 0) {
       const newMyIngredients = props.myIngredients.slice();
-      newMyIngredients.find((item) => item.ingredient === ingredient.ingredient).amount--;
+      newMyIngredients.find((item) => item.ingredient === ingredient.ingredient)
+        .amount--;
       props.setMyIngredients(newMyIngredients);
     }
   }
 
   function renderIngredients() {
-    return props.myIngredients.map((item) => <Ingredient ingredient={item} onPlusClick={() => handlePlusClick(item)} onMinusClick={() => handleMinusClick(item)}/>);
+    return props.myIngredients.map((item) => (
+      <Ingredient
+        ingredient={item}
+        onPlusClick={() => handlePlusClick(item)}
+        onMinusClick={() => handleMinusClick(item)}
+      />
+    ));
   }
 
   return (
-        <div>
-            <div className={utilStyles.rowStack}>
-                <Dropdown
-                    selected={selected}
-                    handleSelectChange={handleSelectChange}
-                    optionsList={props.ingredients.map((item) => {
-                        return {
-                          label: item.ingredient,
-                          value: item.ingredient,
-                        };
-                    }).filter((item) => !props.myIngredients.some((ingredient) => item.label === ingredient.ingredient))}
-                    />
-                <button onClick={handleAddClick}>Add</button>
-            </div>
-            {renderIngredients()}
-        </div>
+    <div>
+      <div className={utilStyles.rowStack}>
+        <Dropdown
+          selected={selected}
+          handleSelectChange={handleSelectChange}
+          optionsList={props.ingredients
+            .map((item) => {
+              return {
+                label: item.ingredient,
+                value: item.ingredient,
+              };
+            })
+            .filter(
+              (item) =>
+                !props.myIngredients.some(
+                  (ingredient) => item.label === ingredient.ingredient
+                )
+            )}
+        />
+        <button onClick={handleAddClick}>Add</button>
+      </div>
+      {renderIngredients()}
+    </div>
   );
 }
