@@ -28,9 +28,8 @@ export default function RecipeList(props: { myIngredients: IngredientItem[], ing
                             myIngredient.amount >= ingredientAmtArr[index])})
             return recipe;
         })
-        console.log("here")
         setRecipes(newRecipes);
-    }, [JSON.stringify(props.myIngredients)]);
+    }, [props.myIngredients]);
 
     return (
         <div>

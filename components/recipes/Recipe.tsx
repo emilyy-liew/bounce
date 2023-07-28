@@ -35,7 +35,7 @@ export default function Recipe(props: { recipe: RecipeItem, ingredients: Ingredi
             <span className={utilStyles.equalSpace}>
                 <p>{props.recipe["recipe title"]}</p>
                 <Image 
-                    src={props.recipe.isDoable ? check : check}
+                    src={props.recipe.isDoable ? check : x}
                     width={20}
                     height={20}
                     alt="check"

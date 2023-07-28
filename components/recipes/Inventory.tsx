@@ -43,8 +43,22 @@ export default function Inventory(props: {myIngredients: IngredientItem[], setMy
     setSelected([]);
   }
 
+  function handlePlusClick(ingredient: IngredientItem) {
+    const newMyIngredients = props.myIngredients.slice();
+    newMyIngredients.find((item) => item.ingredient === ingredient.ingredient).amount++;
+    props.setMyIngredients(newMyIngredients);
+  }
+
+  function handleMinusClick(ingredient: IngredientItem) {
+    if (ingredient.amount > 0) {
+      const newMyIngredients = props.myIngredients.slice();
+      newMyIngredients.find((item) => item.ingredient === ingredient.ingredient).amount--;
+      props.setMyIngredients(newMyIngredients);
+    }
+  }
+
   function renderIngredients() {
-    return props.myIngredients.map((item) => <Ingredient ingredient={item} />);
+    return props.myIngredients.map((item) => <Ingredient ingredient={item} onPlusClick={() => handlePlusClick(item)} onMinusClick={() => handleMinusClick(item)}/>);
   }
 
   return (
