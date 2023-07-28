@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 import minus from "../../public/images/minus.png";
 import plus from "../../public/images/plus.png";
@@ -20,21 +21,28 @@ export interface IngredientItem {
 //     unit
 //   }
 
-export default function Ingredient(props: { ingredient: IngredientItem }) {
+export default function Ingredient(props: { ingredient: IngredientItem, onPlusClick, onMinusClick }) {
+  const [amount, setAmount] = useState<number>(props.ingredient.amount);
   const buttonSize = 20;
+
+  useEffect(() => {
+    setAmount(props.ingredient.amount);
+  }, [props.ingredient.amount])
+
   return (
     <div className={`${utilStyles.rowStack} ${utilStyles.container}`}>
-      <label>{props.ingredient.ingredient}</label>
+      <label>{props.ingredient.ingredient}:</label>
       <span className={styles.button}>
         <Image 
         src={minus}
         alt="minus"
         width={buttonSize}
         height={buttonSize}
+        onClick={props.onMinusClick}
         />
       </span>
     
-      <input className={styles.input} type="number" value={props.ingredient.amount} />
+      <input className={styles.input} type="number" value={amount} />
       
       <span className={styles.button}>
         <Image 
@@ -42,6 +50,7 @@ export default function Ingredient(props: { ingredient: IngredientItem }) {
         alt="plus"
         width={buttonSize}
         height={buttonSize}
+        onClick={props.onPlusClick}
         />
       </span>     
       <p>{props.ingredient.measure}</p>

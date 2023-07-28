@@ -6,9 +6,7 @@ import utilStyles from "../../styles/utils.module.css";
 import styles from "../../styles/recipes.module.css";
 import { useEffect, useState } from "react";
 
-export default function Inventory() {
-  const [ingredients, setIngredients] = useState<IngredientItem[]>([]);
-  const [myIngredients, setMyIngredients] = useState<IngredientItem[]>([]);
+export default function Inventory(props: {myIngredients: IngredientItem[], setMyIngredients, ingredients: IngredientItem[], setIngredients}) {
   const [selected, setSelected] = useState<OptionItem[]>([]);
 
   const handleSelectChange = (selectedOptions: OptionItem[]) => {
@@ -19,7 +17,7 @@ export default function Inventory() {
     const fetchData = async () => {
       try {
         const data = await getIngredients();
-        setIngredients(data.Items);
+        props.setIngredients(data.Items);
       } catch (error) {
         console.log("Error: " + error);
       }
@@ -33,20 +31,34 @@ export default function Inventory() {
       return {
         ingredient: item.label,
         amount: 0,
-        measure: ingredients.find(
+        measure: props.ingredients.find(
           (ingredient) => ingredient.ingredient === item.label
         ).measure,
       };
     });
 
-    let currentIngredients = myIngredients.slice();
-    currentIngredients = [...currentIngredients, ...newMyIngredients];
-    setMyIngredients(currentIngredients);
+    const oldIngredients = props.myIngredients.slice();
+    const newIngredients = [...oldIngredients, ...newMyIngredients];
+    props.setMyIngredients(newIngredients);
     setSelected([]);
   }
 
+  function handlePlusClick(ingredient: IngredientItem) {
+    const newMyIngredients = props.myIngredients.slice();
+    newMyIngredients.find((item) => item.ingredient === ingredient.ingredient).amount++;
+    props.setMyIngredients(newMyIngredients);
+  }
+
+  function handleMinusClick(ingredient: IngredientItem) {
+    if (ingredient.amount > 0) {
+      const newMyIngredients = props.myIngredients.slice();
+      newMyIngredients.find((item) => item.ingredient === ingredient.ingredient).amount--;
+      props.setMyIngredients(newMyIngredients);
+    }
+  }
+
   function renderIngredients() {
-    return myIngredients.map((item) => <Ingredient ingredient={item} />);
+    return props.myIngredients.map((item) => <Ingredient ingredient={item} onPlusClick={() => handlePlusClick(item)} onMinusClick={() => handleMinusClick(item)}/>);
   }
 
   return (
@@ -55,12 +67,12 @@ export default function Inventory() {
                 <Dropdown
                     selected={selected}
                     handleSelectChange={handleSelectChange}
-                    optionsList={ingredients.map((item) => {
+                    optionsList={props.ingredients.map((item) => {
                         return {
                           label: item.ingredient,
                           value: item.ingredient,
                         };
-                    }).filter((item) => !myIngredients.some((ingredient) => item.label === ingredient.ingredient))}
+                    }).filter((item) => !props.myIngredients.some((ingredient) => item.label === ingredient.ingredient))}
                     />
                 <button onClick={handleAddClick}>Add</button>
             </div>
