@@ -21,6 +21,11 @@
   justify-content: space-around;
 }
 
+.equalSpace {
+  display: flex;
+  justify-content: space-between;
+}
+
 .justifyCenter {
   display: flex;
   justify-content: center;
@@ -39,7 +44,5 @@
   margin: 15px 0px;
   padding: 10px;
   border-radius: 10px;
-  width: 525px;
-  float: left;
   background-color: rgb(255, 245, 243);
 }

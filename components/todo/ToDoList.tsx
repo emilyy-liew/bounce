@@ -168,7 +168,7 @@ export default function ToDoList(props: { user: any }) {
 
   function renderList(list: TaskItem[], label: string, length: number) {
     return (
-      <div className={styles.container}>
+      <div className={`${styles.container} ${utilStyles.container}`}>
         <Collapsible
           label={<span>
             {label} <span className={utilStyles.subtext}>({length})</span>
