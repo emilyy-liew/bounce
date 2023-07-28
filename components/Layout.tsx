@@ -8,11 +8,10 @@ export default function Layout({ children, signOut }) {
   return (
     <main>
       <div>
-        <IconBar signOut={signOut} />
-
         <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
           {children}
         </div>
+        <IconBar signOut={signOut} />
       </div>
       <div className={styles.updateText}>
         <a

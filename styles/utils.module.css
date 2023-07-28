@@ -33,3 +33,13 @@
 .leftMargin {
   margin-left: 90px;
 }
+
+.container {
+  border: black 1px solid;
+  margin: 15px 0px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 525px;
+  float: left;
+  background-color: rgb(255, 245, 243);
+}

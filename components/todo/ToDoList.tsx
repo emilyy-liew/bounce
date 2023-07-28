@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import Task from "./Task";
 import { TaskItem } from "./Task";
-import Collapsible from "./Collapsible";
+import Collapsible from "../Collapsible";
 import { getData, updateData } from "../../functions/serverRequests";
 
 import styles from "../../styles/ToDoList.module.css";
@@ -170,8 +170,9 @@ export default function ToDoList(props: { user: any }) {
     return (
       <div className={styles.container}>
         <Collapsible
-          label={label}
-          length={length}
+          label={<span>
+            {label} <span className={utilStyles.subtext}>({length})</span>
+          </span>}
           children={list.map((task) => (
             <Task
               key={task.id}
@@ -182,6 +183,7 @@ export default function ToDoList(props: { user: any }) {
               onPauseClick={handlePause}
             />
           ))}
+          visible
         />
       </div>
     );

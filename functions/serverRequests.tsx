@@ -33,7 +33,20 @@ export async function updateData(userID, attributeName, attributeValue) {
 
 export async function getIngredients() {
   const response = await fetch(
-    "https://2p4s2d45nb.execute-api.eu-north-1.amazonaws.com/test/recipe/"
+    "https://2p4s2d45nb.execute-api.eu-north-1.amazonaws.com/test/ingredients"
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch Ingredient Options");
+  }
+
+  const data = await response.json();
+  return JSON.parse(data.body);
+}
+
+export async function getRecipes() {
+  const response = await fetch(
+    "https://2p4s2d45nb.execute-api.eu-north-1.amazonaws.com/test/recipes/"
   );
 
   if (!response.ok) {
