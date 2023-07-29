@@ -21,7 +21,10 @@ export default function Recipe(props: {
   const recipeIngredients = Object.entries(props.recipe.ingredients);
   const ingredientList = recipeIngredients.map(([ingredient, amount]) => (
     <p>{`${amount} ${
-      props.ingredients.find((item) => item.ingredient === ingredient).measure
+      props.ingredients.find((item) => item.ingredient === ingredient)
+        ? props.ingredients.find((item) => item.ingredient === ingredient)
+            .measure
+        : "unknown"
     } ${ingredient}`}</p>
   ));
 
@@ -43,13 +46,9 @@ export default function Recipe(props: {
       label={
         <span className={utilStyles.equalSpace}>
           <p>{props.recipe.recipeTitle}</p>
-          {!props.recipe.isDoable && 
-          <Image
-            src={x}
-            width={20}
-            height={20}
-            alt="check"
-          />}
+          {!props.recipe.isDoable && (
+            <Image src={x} width={20} height={20} alt="check" />
+          )}
         </span>
       }
       visible={false}

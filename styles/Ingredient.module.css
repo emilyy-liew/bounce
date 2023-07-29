@@ -1,17 +1,21 @@
 .element {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .input {
-    width: 40px;
+  width: 40px;
 }
 
 .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .label {
-    font-weight: 550;
+  font-weight: 550;
+}
+
+.container {
+  margin-bottom: 10px;
 }

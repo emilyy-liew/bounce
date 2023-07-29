@@ -34,8 +34,10 @@ export default function Ingredient(props: {
   }, [props.ingredient.amount]);
 
   return (
-    <div className={`${utilStyles.rowStack} ${utilStyles.container}`}>
-      <label className={`${styles.label} ${styles.element}`}>{props.ingredient.ingredient}:</label>
+    <div className={`${utilStyles.rowStack} ${styles.container}`}>
+      <label className={`${styles.label} ${styles.element}`}>
+        {props.ingredient.ingredient}:
+      </label>
       <span className={`${styles.button} ${styles.element}`}>
         <Image
           src={minus}
@@ -46,7 +48,11 @@ export default function Ingredient(props: {
         />
       </span>
 
-      <input className={`${styles.input} ${styles.element}`} type="number" value={amount} />
+      <input
+        className={`${styles.input} ${styles.element}`}
+        type="number"
+        value={amount}
+      />
 
       <span className={`${styles.button} ${styles.element}`}>
         <Image

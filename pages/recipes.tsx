@@ -1,15 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Header, Subheader1 } from "../components/Headers";
 import Inventory from "../components/recipes/Inventory";
 import RecipeList from "../components/recipes/RecipeList";
 import { IngredientItem } from "../components/recipes/Ingredient";
+import { getData, updateData } from "../functions/serverRequests";
 
 import utilStyles from "../styles/utils.module.css";
 
 export default function RecipeDashboardPage(props: { user: any }) {
   const [ingredients, setIngredients] = useState<IngredientItem[]>([]);
   const [myIngredients, setMyIngredients] = useState<IngredientItem[]>([]);
+  const [dataInitialized, setDataInitialized] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getMyIngredients = async () => {
+      try {
+        const data = await getData(props.user.username);
+        if (data.Item.myIngredients !== undefined) {
+          setMyIngredients(data.Item.myIngredients);
+        }
+        setDataInitialized(true);
+      } catch (error) {
+        console.log("Error: " + error);
+      }
+    };
+
+    getMyIngredients();
+  }, []);
+
+  useEffect(() => {
+    const update = async () => {
+      try {
+        if (dataInitialized) {
+          await updateData(props.user.username, "myIngredients", myIngredients);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    update();
+  }, [dataInitialized, myIngredients]);
 
   return (
     <div>

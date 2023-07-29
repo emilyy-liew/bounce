@@ -86,14 +86,15 @@ export default function Inventory(props: {
         />
         <button onClick={handleAddClick}>Add</button>
       </div>
-
-      {props.myIngredients.map((item) => (
-        <Ingredient
-          ingredient={item}
-          onPlusClick={() => handlePlusClick(item)}
-          onMinusClick={() => handleMinusClick(item)}
-        />
-      ))}
+      <div className={utilStyles.container}>
+        {props.myIngredients.map((item) => (
+          <Ingredient
+            ingredient={item}
+            onPlusClick={() => handlePlusClick(item)}
+            onMinusClick={() => handleMinusClick(item)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
