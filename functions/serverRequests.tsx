@@ -1,4 +1,4 @@
-export async function getData(userID) {
+export async function getData(userID: any) {
   const response = await fetch(
     `https://2p4s2d45nb.execute-api.eu-north-1.amazonaws.com/test/data/${userID}`
   );

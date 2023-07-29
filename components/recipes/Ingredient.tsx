@@ -23,8 +23,8 @@ export interface IngredientItem {
 
 export default function Ingredient(props: {
   ingredient: IngredientItem;
-  onPlusClick;
-  onMinusClick;
+  onPlusClick: () => void;
+  onMinusClick: () => void;
 }) {
   const [amount, setAmount] = useState<number>(props.ingredient.amount);
   const buttonSize = 20;

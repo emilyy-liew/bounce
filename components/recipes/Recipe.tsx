@@ -9,7 +9,7 @@ import { IngredientItem } from "./Ingredient";
 
 export interface RecipeItem {
   ID: string;
-  "recipe title": string;
+  recipeTitle: string;
   ingredients: { amount: number };
   steps: string[];
   isDoable: boolean;
@@ -43,7 +43,7 @@ export default function Recipe(props: {
       children={children}
       label={
         <span className={utilStyles.equalSpace}>
-          <p>{props.recipe["recipe title"]}</p>
+          <p>{props.recipe.recipeTitle}</p>
           <Image
             src={props.recipe.isDoable ? check : x}
             width={20}

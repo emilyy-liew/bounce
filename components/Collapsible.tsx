@@ -8,7 +8,7 @@ import styles from "../styles/Collapsible.module.css";
 
 export default function Collapsible(props: {
   children: ReactNode;
-  label: React.ReactNode;
+  label: ReactNode;
   visible: boolean;
 }) {
   const [isVisible, setIsVisible] = useState<boolean>(props.visible);

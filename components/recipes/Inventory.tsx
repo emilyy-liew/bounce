@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch } from "react";
 
 import { getIngredients } from "../../functions/serverRequests";
 import Dropdown, { OptionItem } from "../Dropdown";
@@ -8,9 +8,9 @@ import utilStyles from "../../styles/utils.module.css";
 
 export default function Inventory(props: {
   myIngredients: IngredientItem[];
-  setMyIngredients;
+  setMyIngredients: Dispatch<IngredientItem[]>;
   ingredients: IngredientItem[];
-  setIngredients;
+  setIngredients: Dispatch<IngredientItem[]>;
 }) {
   const [selected, setSelected] = useState<OptionItem[]>([]);
 
@@ -64,16 +64,6 @@ export default function Inventory(props: {
     }
   }
 
-  function renderIngredients() {
-    return props.myIngredients.map((item) => (
-      <Ingredient
-        ingredient={item}
-        onPlusClick={() => handlePlusClick(item)}
-        onMinusClick={() => handleMinusClick(item)}
-      />
-    ));
-  }
-
   return (
     <div>
       <div className={utilStyles.rowStack}>
@@ -96,7 +86,14 @@ export default function Inventory(props: {
         />
         <button onClick={handleAddClick}>Add</button>
       </div>
-      {renderIngredients()}
+
+      {props.myIngredients.map((item) => (
+        <Ingredient
+          ingredient={item}
+          onPlusClick={() => handlePlusClick(item)}
+          onMinusClick={() => handleMinusClick(item)}
+        />
+      ))}
     </div>
   );
 }

@@ -1,17 +1,22 @@
+import { ReactNode } from "react";
+
 import IconBar from "./IconBar";
 import { updatesText } from "../pages/updatesLog";
 
 import styles from "../styles/Layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-export default function Layout({ children, signOut }) {
+export default function Layout(props: {
+  children: ReactNode;
+  signOut: (data: any) => void;
+}) {
   return (
     <main>
       <div>
         <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
-          {children}
+          {props.children}
         </div>
-        <IconBar signOut={signOut} />
+        <IconBar signOut={props.signOut} />
       </div>
       <div className={styles.updateText}>
         <a

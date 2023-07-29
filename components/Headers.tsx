@@ -1,7 +1,7 @@
-export function Header({ title }) {
-  return <h1>{title ? title : "Default title"}</h1>;
+export function Header(props: { title: string }) {
+  return <h1>{props.title ? props.title : "Default title"}</h1>;
 }
 
-export function Subheader1({ title }) {
-  return <h2>{title ? title : "Default title"}</h2>;
+export function Subheader1(props: { title: string }) {
+  return <h2>{props.title ? props.title : "Default title"}</h2>;
 }
