@@ -1,3 +1,7 @@
+.element {
+    margin-right: 10px;
+}
+
 .input {
     width: 40px;
 }
@@ -6,4 +10,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.label {
+    font-weight: 550;
 }

@@ -1,8 +1,7 @@
 import Image from "next/image";
 
 import Collapsible from "../Collapsible";
-import check from "../../public/images/plus.png";
-import x from "../../public/images/minus.png";
+import x from "../../public/images/x.png";
 
 import utilStyles from "../../styles/utils.module.css";
 import { IngredientItem } from "./Ingredient";
@@ -44,12 +43,13 @@ export default function Recipe(props: {
       label={
         <span className={utilStyles.equalSpace}>
           <p>{props.recipe.recipeTitle}</p>
+          {!props.recipe.isDoable && 
           <Image
-            src={props.recipe.isDoable ? check : x}
+            src={x}
             width={20}
             height={20}
             alt="check"
-          />
+          />}
         </span>
       }
       visible={false}

@@ -5,6 +5,7 @@ import Recipe, { RecipeItem } from "./Recipe";
 import { IngredientItem } from "./Ingredient";
 
 import utilStyles from "../../styles/utils.module.css";
+import styles from "../../styles/RecipeList.module.css";
 
 export default function RecipeList(props: {
   myIngredients: IngredientItem[];
@@ -42,7 +43,7 @@ export default function RecipeList(props: {
     <div>
       {recipes.map((recipe) => {
         return (
-          <div className={utilStyles.container}>
+          <div className={`${utilStyles.container} ${!recipe.isDoable ? styles.disabled : styles.enabled}`}>
             <Recipe
               key={recipe.ID}
               recipe={recipe}
