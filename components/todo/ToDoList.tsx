@@ -39,6 +39,7 @@ export default function ToDoList(props: { user: any }) {
 
     fetchData();
   }, []);
+
   useEffect(() => {
     const update = async () => {
       try {
