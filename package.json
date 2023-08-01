@@ -4,6 +4,7 @@
     "build": "next build"
   },
   "dependencies": {
+    "@aws-amplify/storage": "^5.9.0",
     "@aws-amplify/ui-react": "^5.0.5",
     "@aws-sdk/util-utf8-browser": "^3.259.0",
     "moment": "^2.29.4",
