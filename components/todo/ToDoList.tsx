@@ -19,7 +19,7 @@ export default function ToDoList(props: { user: any }) {
   const [someday, setSomeday] = useState<TaskItem[]>([]);
   const [name, setName] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
-  const [duration, setDuration] = useState<number | null>(null);
+  const [duration, setDuration] = useState<number | string>("");
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [currentTask, setCurrentTask] = useState<TaskItem>(null);
   const [dataInitialized, setDataInitialized] = useState(false);
@@ -117,7 +117,8 @@ export default function ToDoList(props: { user: any }) {
         id: uuidv4(),
         name: name,
         deadline: deadline,
-        duration: duration === undefined || duration < 0 ? 0 : duration,
+        duration:
+          duration === "" || Number(duration) < 0 ? 0 : Number(duration),
         isRunning: false,
         checked: false,
         time: 0,
@@ -135,7 +136,7 @@ export default function ToDoList(props: { user: any }) {
       }
       setName("");
       setDeadline("");
-      setDuration(null);
+      setDuration("");
     }
   }
 
