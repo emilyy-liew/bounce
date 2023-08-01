@@ -39,21 +39,45 @@ export default function RecipeList(props: {
 
   return (
     <div>
-      {props.recipes.map((recipe) => {
-        return (
-          <div
-            className={`${utilStyles.container} ${
-              !recipe.isDoable ? styles.disabled : styles.enabled
-            }`}
-          >
-            <Recipe
-              key={recipe.ID}
-              recipe={recipe}
-              ingredients={props.ingredients}
-            />
-          </div>
-        );
-      })}
+      {props.recipes
+        .sort((a, b) => {
+          if (a.isDoable && b.isDoable) {
+            if (a.recipeTitle < b.recipeTitle) {
+              return -1;
+            } else if (a.recipeTitle > b.recipeTitle) {
+              return 1;
+            } else {
+              return 0;
+            }
+          } else if (a.isDoable && !b.isDoable) {
+            return -1;
+          } else if (!a.isDoable && b.isDoable) {
+            return 1;
+          } else {
+            if (a.recipeTitle < b.recipeTitle) {
+              return -1;
+            } else if (a.recipeTitle > b.recipeTitle) {
+              return 1;
+            } else {
+              return 0;
+            }
+          }
+        })
+        .map((recipe) => {
+          return (
+            <div
+              className={`${utilStyles.container} ${
+                !recipe.isDoable ? styles.disabled : styles.enabled
+              }`}
+            >
+              <Recipe
+                key={recipe.ID}
+                recipe={recipe}
+                ingredients={props.ingredients}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 }
