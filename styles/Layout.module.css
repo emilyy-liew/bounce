@@ -6,9 +6,14 @@
   padding: 10px;
   border-radius: 15px;
   color: rgb(85, 85, 85);
+  background-color: rgb(233, 173, 160);
 }
 
 .link {
   text-decoration: underline;
   color: rgb(85, 85, 85);
+}
+
+.contentWrapper {
+  margin-bottom: 50px;
 }
