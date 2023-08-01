@@ -12,30 +12,36 @@ export default function RecipeList(props: {
   ingredients: IngredientItem[];
   recipes: RecipeItem[];
   setRecipes;
+  dataInitialized: boolean;
 }) {
+  const [recipesInitialized, setRecipesInitialized] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchRecipes = async () => {
       const data = await getRecipes();
       props.setRecipes(data.Items);
+      setRecipesInitialized(true);
     };
 
     fetchRecipes();
   }, []);
 
   useEffect(() => {
-    const oldRecipes = props.recipes.slice();
-    const newRecipes = oldRecipes.map((recipe) => {
-      recipe.isDoable = recipe.ingredients.every((recipeIngredient) => {
-        return props.myIngredients.some(
-          (myIngredient) =>
-            myIngredient.ingredient === recipeIngredient.ingredient &&
-            myIngredient.amount >= recipeIngredient.amount
-        );
+    if (props.dataInitialized && recipesInitialized) {
+      const oldRecipes = props.recipes.slice();
+      const newRecipes = oldRecipes.map((recipe) => {
+        recipe.isDoable = recipe.ingredients.every((recipeIngredient) => {
+          return props.myIngredients.some(
+            (myIngredient) =>
+              myIngredient.ingredient === recipeIngredient.ingredient &&
+              myIngredient.amount >= recipeIngredient.amount
+          );
+        });
+        return recipe;
       });
-      return recipe;
-    });
-    props.setRecipes(newRecipes);
-  }, [props.myIngredients]);
+      props.setRecipes(newRecipes);
+    }
+  }, [props.myIngredients, props.dataInitialized, recipesInitialized]);
 
   return (
     <div>

@@ -72,6 +72,7 @@ export default function RecipeDashboardPage(props: { user: any }) {
             ingredients={ingredients}
             recipes={recipes}
             setRecipes={setRecipes}
+            dataInitialized={dataInitialized}
           />
         </div>
         <Subheader1 title="Grocery List." />
