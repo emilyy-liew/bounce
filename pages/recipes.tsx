@@ -5,13 +5,17 @@ import Inventory from "../components/recipes/Inventory";
 import RecipeList from "../components/recipes/RecipeList";
 import { IngredientItem } from "../components/recipes/Ingredient";
 import { getData, updateData } from "../functions/serverRequests";
+import { RecipeItem } from "../components/recipes/Recipe";
 
 import utilStyles from "../styles/utils.module.css";
+import NewRecipeForm from "../components/recipes/NewRecipeForm";
 
 export default function RecipeDashboardPage(props: { user: any }) {
   const [ingredients, setIngredients] = useState<IngredientItem[]>([]);
   const [myIngredients, setMyIngredients] = useState<IngredientItem[]>([]);
   const [dataInitialized, setDataInitialized] = useState<boolean>(false);
+  const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
+  const [recipes, setRecipes] = useState<RecipeItem[]>([]);
 
   useEffect(() => {
     const getMyIngredients = async () => {
@@ -43,6 +47,10 @@ export default function RecipeDashboardPage(props: { user: any }) {
     update();
   }, [dataInitialized, myIngredients]);
 
+  function handleAddClick() {
+    setIsFormVisible(true);
+  }
+
   return (
     <div>
       <Header title="Recipes. 🥘" />
@@ -58,9 +66,24 @@ export default function RecipeDashboardPage(props: { user: any }) {
         </div>
         <div>
           <Subheader1 title="Recipes." />
-          <RecipeList myIngredients={myIngredients} ingredients={ingredients} />
+          <button onClick={handleAddClick}>Add Recipe</button>
+          <RecipeList
+            myIngredients={myIngredients}
+            ingredients={ingredients}
+            recipes={recipes}
+            setRecipes={setRecipes}
+          />
         </div>
         <Subheader1 title="Grocery List." />
+        {isFormVisible && (
+          <NewRecipeForm
+            setIsFormVisible={setIsFormVisible}
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+            myIngredients={myIngredients}
+            setRecipes={setRecipes}
+          />
+        )}
       </div>
     </div>
   );

@@ -10,40 +10,42 @@ import styles from "../../styles/RecipeList.module.css";
 export default function RecipeList(props: {
   myIngredients: IngredientItem[];
   ingredients: IngredientItem[];
+  recipes: RecipeItem[];
+  setRecipes;
 }) {
-  const [recipes, setRecipes] = useState<RecipeItem[]>([]);
-
   useEffect(() => {
     const fetchRecipes = async () => {
       const data = await getRecipes();
-      setRecipes(data.Items);
+      props.setRecipes(data.Items);
     };
 
     fetchRecipes();
   }, []);
 
   useEffect(() => {
-    const oldRecipes = recipes.slice();
+    const oldRecipes = props.recipes.slice();
     const newRecipes = oldRecipes.map((recipe) => {
-      const recipeIngredientArr = Object.keys(recipe.ingredients);
-      const ingredientAmtArr = Object.values(recipe.ingredients);
-      recipe.isDoable = recipeIngredientArr.every((recipeIngredient, index) => {
+      recipe.isDoable = recipe.ingredients.every((recipeIngredient) => {
         return props.myIngredients.some(
           (myIngredient) =>
-            myIngredient.ingredient === recipeIngredient &&
-            myIngredient.amount >= ingredientAmtArr[index]
+            myIngredient.ingredient === recipeIngredient.ingredient &&
+            myIngredient.amount >= recipeIngredient.amount
         );
       });
       return recipe;
     });
-    setRecipes(newRecipes);
+    props.setRecipes(newRecipes);
   }, [props.myIngredients]);
 
   return (
     <div>
-      {recipes.map((recipe) => {
+      {props.recipes.map((recipe) => {
         return (
-          <div className={`${utilStyles.container} ${!recipe.isDoable ? styles.disabled : styles.enabled}`}>
+          <div
+            className={`${utilStyles.container} ${
+              !recipe.isDoable ? styles.disabled : styles.enabled
+            }`}
+          >
             <Recipe
               key={recipe.ID}
               recipe={recipe}

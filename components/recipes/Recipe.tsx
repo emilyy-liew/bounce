@@ -9,7 +9,7 @@ import { IngredientItem } from "./Ingredient";
 export interface RecipeItem {
   ID: string;
   recipeTitle: string;
-  ingredients: { amount: number };
+  ingredients: IngredientItem[];
   steps: string[];
   isDoable: boolean;
 }
@@ -18,14 +18,16 @@ export default function Recipe(props: {
   recipe: RecipeItem;
   ingredients: IngredientItem[];
 }) {
-  const recipeIngredients = Object.entries(props.recipe.ingredients);
-  const ingredientList = recipeIngredients.map(([ingredient, amount]) => (
-    <p>{`${amount} ${
-      props.ingredients.find((item) => item.ingredient === ingredient)
-        ? props.ingredients.find((item) => item.ingredient === ingredient)
-            .measure
+  const ingredientList = props.recipe.ingredients.map((ingredient) => (
+    <p>{`${ingredient.amount} ${
+      props.ingredients.find(
+        (item) => item.ingredient === ingredient.ingredient
+      )
+        ? props.ingredients.find(
+            (item) => item.ingredient === ingredient.ingredient
+          ).measure
         : "unknown"
-    } ${ingredient}`}</p>
+    } ${ingredient.ingredient}`}</p>
   ));
 
   const steps = props.recipe.steps.map((step, index) => {

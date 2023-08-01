@@ -1,0 +1,31 @@
+.window {
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  height: 85%;
+  position: absolute;
+  border-radius: 10px;
+  box-shadow: -8px 8px rgb(255, 165, 116);
+  border: 3px solid rgb(247, 151, 111);
+  overflow-y: scroll;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.content {
+  padding: 15px;
+}
+
+.titleBar {
+  background-color: rgb(228, 228, 228);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.2em;
+  flex-grow: 1;
+  text-align: center;
+}
