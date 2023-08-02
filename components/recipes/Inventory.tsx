@@ -86,25 +86,27 @@ export default function Inventory(props: {
         />
         <button onClick={handleAddClick}>Add</button>
       </div>
-      <div className={utilStyles.container}>
-        {props.myIngredients
-          .sort((a, b) => {
-            if (a.ingredient > b.ingredient) {
-              return 1;
-            } else if (a.ingredient < b.ingredient) {
-              return -1;
-            } else {
-              return 0;
-            }
-          })
-          .map((item) => (
-            <Ingredient
-              ingredient={item}
-              onPlusClick={() => handlePlusClick(item)}
-              onMinusClick={() => handleMinusClick(item)}
-            />
-          ))}
-      </div>
+      {props.myIngredients.length > 0 && (
+        <div className={utilStyles.container}>
+          {props.myIngredients
+            .sort((a, b) => {
+              if (a.ingredient > b.ingredient) {
+                return 1;
+              } else if (a.ingredient < b.ingredient) {
+                return -1;
+              } else {
+                return 0;
+              }
+            })
+            .map((item) => (
+              <Ingredient
+                ingredient={item}
+                onPlusClick={() => handlePlusClick(item)}
+                onMinusClick={() => handleMinusClick(item)}
+              />
+            ))}
+        </div>
+      )}
     </div>
   );
 }
