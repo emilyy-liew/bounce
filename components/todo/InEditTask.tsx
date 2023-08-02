@@ -48,9 +48,15 @@ export default function InEditTask(props: {
           onChange={(event) => handleChange(event, "deadline")}
         />
 
-        <label className={`${styles.label} ${styles.duration}`}>
-          {props.task.today} min
-        </label>
+        <span className={styles.durationContainer}>
+          <input
+            type="number"
+            className={`${styles.duration}`}
+            value={task.duration}
+            onChange={(event) => handleChange(event, "duration")}
+          />
+          min
+        </span>
 
         <Stopwatch
           task={props.task}
@@ -64,7 +70,9 @@ export default function InEditTask(props: {
             width={buttonSize}
             height={buttonSize}
             alt="Edit button"
-            onClick={(event) => props.onEditClick(task)}
+            onClick={(event) => {
+              props.onEditClick(task);
+            }}
           />
           {/* <Image
             src={x}

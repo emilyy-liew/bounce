@@ -120,7 +120,6 @@ export default function ToDoList(props: { user: any }) {
         deadline: deadline,
         duration:
           duration === "" || Number(duration) < 0 ? 0 : Number(duration),
-        timeSpent: 0,
         isRunning: false,
         checked: false,
         time: 0,
@@ -186,6 +185,7 @@ export default function ToDoList(props: { user: any }) {
       if (curr.id === task.id) {
         curr.name = task.name;
         curr.deadline = task.deadline;
+        curr.duration = task.duration;
         curr.inEditMode = !curr.inEditMode;
       }
     });
@@ -241,8 +241,8 @@ export default function ToDoList(props: { user: any }) {
 
   function handleStop(time: number, task: TaskItem) {
     if (taskList.includes(task)) {
-      task.timeSpent += time;
       const deadline = new Date(task.deadline);
+      task.time = 0;
 
       task.duration -= Math.floor(time / 60);
       if (task.duration < 0) {

@@ -10,7 +10,6 @@ export interface TaskItem {
   name: string;
   deadline: string;
   duration: number;
-  timeSpent: number;
   isRunning: boolean;
   checked: boolean;
   today?: number;
