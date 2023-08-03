@@ -10,6 +10,7 @@ import { getData, updateData } from "../../functions/serverRequests";
 import styles from "../../styles/ToDoList.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import InEditTask from "./InEditTask";
 
 const localizer = momentLocalizer(moment);
 
@@ -122,6 +123,7 @@ export default function ToDoList(props: { user: any }) {
         isRunning: false,
         checked: false,
         time: 0,
+        inEditMode: false,
       };
 
       if (deadline === "") {
@@ -167,6 +169,29 @@ export default function ToDoList(props: { user: any }) {
     categories[difference].push(task);
   });
 
+  function handleEdit(task: TaskItem) {
+    if (completed.some((curr) => curr.id === task.id)) {
+      handleEditHelper(completed, setCompleted, task);
+    } else if (taskList.some((curr) => curr.id === task.id)) {
+      handleEditHelper(taskList, setTaskList, task);
+    } else if (someday.some((curr) => curr.id === task.id)) {
+      handleEditHelper(someday, setSomeday, task);
+    }
+  }
+
+  function handleEditHelper(list: TaskItem[], setter, task: TaskItem) {
+    const newList = list.slice();
+    newList.forEach((curr) => {
+      if (curr.id === task.id) {
+        curr.name = task.name;
+        curr.deadline = task.deadline;
+        curr.duration = task.duration;
+        curr.inEditMode = !curr.inEditMode;
+      }
+    });
+    setter(newList);
+  }
+
   function renderList(list: TaskItem[], label: string, length: number) {
     return (
       <div className={`${styles.container} ${utilStyles.container}`}>
@@ -176,16 +201,29 @@ export default function ToDoList(props: { user: any }) {
               {label} <span className={utilStyles.subtext}>({length})</span>
             </span>
           }
-          children={list.map((task) => (
-            <Task
-              key={task.id}
-              task={task}
-              onCheckboxChange={(task) => handleCheckboxClick(task)}
-              onStopClick={handleStop}
-              onPlayClick={() => handlePlay(task)}
-              onPauseClick={handlePause}
-            />
-          ))}
+          children={list.map((task) =>
+            !task.inEditMode ? (
+              <Task
+                key={task.id}
+                task={task}
+                onCheckboxChange={(task) => handleCheckboxClick(task)}
+                onStopClick={handleStop}
+                onPlayClick={() => handlePlay(task)}
+                onPauseClick={handlePause}
+                onEditClick={() => handleEdit(task)}
+              />
+            ) : (
+              <InEditTask
+                key={task.id}
+                task={task}
+                onCheckboxChange={(task) => handleCheckboxClick(task)}
+                onStopClick={handleStop}
+                onPlayClick={() => handlePlay(task)}
+                onPauseClick={handlePause}
+                onEditClick={handleEdit}
+              />
+            )
+          )}
           visible
         />
       </div>
@@ -204,6 +242,7 @@ export default function ToDoList(props: { user: any }) {
   function handleStop(time: number, task: TaskItem) {
     if (taskList.includes(task)) {
       const deadline = new Date(task.deadline);
+      task.time = 0;
 
       task.duration -= Math.floor(time / 60);
       if (task.duration < 0) {
