@@ -1,7 +1,6 @@
-import { ReactNode } from "react";
+import { useState, useEffect, ReactNode } from "react";
 
 import IconBar from "./IconBar";
-import { updatesText } from "../pages/updatesLog";
 
 import styles from "../styles/Layout.module.css";
 import utilStyles from "../styles/utils.module.css";
@@ -12,7 +11,7 @@ export default function Layout(props: {
 }) {
   return (
     <main>
-      <div>
+      <div className={styles.contentWrapper}>
         <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
           {props.children}
         </div>
@@ -25,9 +24,8 @@ export default function Layout(props: {
           rel="noopener noreferrer" /* Recommended for security */
           className={styles.link}
         >
-          Bounce July 28, 2023 Version:
+          August 1, 2023 Version
         </a>
-        {" " + updatesText}
       </div>
     </main>
   );

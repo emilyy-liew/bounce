@@ -10,14 +10,6 @@
       "StackName": "amplify-bounce-dev-04131",
       "StackId": "arn:aws:cloudformation:eu-north-1:726820468720:stack/amplify-bounce-dev-04131/8ab3fe00-25ee-11ee-8c39-0ab716f76664",
       "AmplifyAppId": "d2ngor7ea7fphp"
-    },
-    "categories": {
-      "storage": {
-        "bounceData": {}
-      },
-      "auth": {
-        "bouncea7275702a7275702": {}
-      }
     }
   }
 }

@@ -149,7 +149,7 @@ export default function ToDoList(props: { user: any }) {
     setter(event.target.value);
   }
 
-  let categories: TaskItem[][] = [];
+  const categories: TaskItem[][] = [];
   taskList.map((task) => {
     const deadline = new Date(task.deadline);
     let difference = Math.floor(
@@ -331,15 +331,13 @@ export default function ToDoList(props: { user: any }) {
             renderList(completed, "Completed", completed.length)}
 
           {categories.map((tasks, index) => {
-            if (index && tasks !== undefined) {
-              return renderList(
-                tasks,
-                `${index} ${index === 1 ? "day" : "days"} left`,
-                tasks.length
-              );
-            } else {
-              return renderList(tasks, `0 days left`, tasks.length);
-            }
+            const isLastContainer = index === categories.length - 1;
+
+            return renderList(
+              tasks,
+              `${index} ${index === 1 ? "day" : "days"} left`,
+              tasks.length
+            );
           })}
 
           {someday.length > 0 && renderList(someday, "Someday", someday.length)}
