@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Authenticator>
       {({ signOut, user }) => (
-        <Layout signOut={signOut}>
+        <Layout signOut={signOut} user={user}>
           <Component user={user} {...pageProps} />
         </Layout>
       )}

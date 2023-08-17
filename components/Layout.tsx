@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode } from "react";
+import { ReactNode } from "react";
 
 import IconBar from "./IconBar";
 
@@ -8,6 +8,7 @@ import utilStyles from "../styles/utils.module.css";
 export default function Layout(props: {
   children: ReactNode;
   signOut: (data: any) => void;
+  user: any;
 }) {
   return (
     <main>
@@ -15,7 +16,7 @@ export default function Layout(props: {
         <div className={`${utilStyles.columnStack} ${utilStyles.leftMargin}`}>
           {props.children}
         </div>
-        <IconBar signOut={props.signOut} />
+        <IconBar signOut={props.signOut} user={props.user} />
       </div>
       <div className={styles.updateText}>
         <a
@@ -24,7 +25,7 @@ export default function Layout(props: {
           rel="noopener noreferrer" /* Recommended for security */
           className={styles.link}
         >
-          August 1, 2023 Version
+          August 12, 2023 Version
         </a>
       </div>
     </main>
