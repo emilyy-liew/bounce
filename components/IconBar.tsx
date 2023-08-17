@@ -9,6 +9,13 @@ import sign_out from "../public/images/sign_out.png";
 
 import styles from "../styles/IconBar.module.css";
 
+/**
+ * Creates the icon bar at the left of the screen used to redirect to other pages.
+ *
+ * @param signOut The sign out function.
+ * @param user The user object.
+ * @returns The icon bar.
+ */
 export default function IconBar(props: {
   signOut: (data: any) => void;
   user: any;
