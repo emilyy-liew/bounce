@@ -18,6 +18,17 @@ export interface TaskItem {
   inEditMode: boolean;
 }
 
+/**
+ * Creates a to do list task.
+ *
+ * @param task The task to create.
+ * @param onCheckboxChange The function to call when the checkbox is changed.
+ * @param onStopClick The function to call when the stop button is clicked.
+ * @param onPlayClick The function to call when the play button is clicked.
+ * @param onPauseClick The function to call when the pause button is clicked.
+ * @param onEditClick The function to call when the edit button is clicked.
+ * @returns A to do list task.
+ */
 export default function Task(props: {
   task: TaskItem;
   onCheckboxChange: (task: TaskItem) => void;

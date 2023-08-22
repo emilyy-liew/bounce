@@ -6,6 +6,14 @@ import collapsedImg from "../public/images/collapsed.png";
 
 import styles from "../styles/Collapsible.module.css";
 
+/**
+ * Creatses a collapsible section that contains content.
+ *
+ * @param children The content of the collapsible section.
+ * @param label The label of the collapsible section.
+ * @param visible Whether the content is collapsed.
+ * @returns A collapsible section.
+ */
 export default function Collapsible(props: {
   children: ReactNode;
   label: ReactNode;

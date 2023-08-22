@@ -14,6 +14,12 @@ import InEditTask from "./InEditTask";
 
 const localizer = momentLocalizer(moment);
 
+/**
+ * Creates the to do list.
+ *
+ * @param user The user object.
+ * @returns The to do list.
+ */
 export default function ToDoList(props: { user: any }) {
   const [taskList, setTaskList] = useState<TaskItem[]>([]);
   const [completed, setCompleted] = useState<TaskItem[]>([]);
