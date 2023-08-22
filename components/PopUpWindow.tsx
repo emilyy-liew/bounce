@@ -8,7 +8,7 @@ import utilStyles from "../styles/utils.module.css";
 export default function PopUpWindow(props: { setter; label; children }) {
   const buttonSize = 20;
   return (
-    <div className={styles.window}>
+    <div className={`${styles.window}`}>
       <div className={utilStyles.columnStack}>
         <div className={`${utilStyles.rowStack} ${styles.titleBar}`}>
           <span className={`${styles.button}`}>
