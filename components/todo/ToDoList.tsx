@@ -217,6 +217,10 @@ export default function ToDoList(props: { user: any }) {
                 onPlayClick={() => handlePlay(task)}
                 onPauseClick={handlePause}
                 onEditClick={() => handleEdit(task)}
+                pastDue={
+                  task.deadline !== "" &&
+                  new Date(task.deadline).getTime() < currentDate.getTime()
+                }
               />
             ) : (
               <InEditTask

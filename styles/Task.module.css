@@ -36,3 +36,7 @@
 .edit:hover {
   cursor: pointer;
 }
+
+.pastDue {
+  color: rgb(239, 82, 82);
+}

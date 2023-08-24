@@ -36,25 +36,38 @@ export default function Task(props: {
   onPlayClick: (task: TaskItem) => void;
   onPauseClick: (time: number, task: TaskItem) => void;
   onEditClick: () => void;
+  pastDue: boolean;
 }) {
   const buttonSize = 20;
+  const isRed: boolean = props.pastDue && !props.task.checked;
+
   return (
     <div className={styles.container}>
       <div className={styles.labelsContainer}>
         <input
-          className={styles.element}
+          className={`${styles.element}`}
           type="checkbox"
           id={props.task.id}
           onChange={(event) => props.onCheckboxChange(props.task)}
           defaultChecked={props.task.checked}
         />
-        <label className={styles.label}>{props.task.name}</label>
+        <label className={`${styles.label} ${isRed ? styles.pastDue : ""}`}>
+          {props.task.name}
+        </label>
 
-        <label className={`${styles.label} ${styles.deadline}`}>
+        <label
+          className={`${styles.label} ${styles.deadline} ${
+            isRed ? styles.pastDue : ""
+          }`}
+        >
           {props.task.deadline}
         </label>
 
-        <label className={`${styles.label} ${styles.duration}`}>
+        <label
+          className={`${styles.label} ${styles.duration} ${
+            isRed ? styles.pastDue : ""
+          }`}
+        >
           {props.task.today} min
         </label>
 
