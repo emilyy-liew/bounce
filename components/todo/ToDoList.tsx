@@ -173,6 +173,18 @@ export default function ToDoList(props: { user: any }) {
 
     task.difference = difference;
     categories[difference].push(task);
+    categories[difference].sort((a, b) => {
+      const aIsRed = new Date(a.deadline).getTime() < currentDate.getTime();
+      const bIsRed = new Date(b.deadline).getTime() < currentDate.getTime();
+      if ((!aIsRed && bIsRed) || (aIsRed && !bIsRed)) {
+        if (aIsRed) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+      return b.today - a.today;
+    });
   });
 
   function handleEdit(task: TaskItem) {
