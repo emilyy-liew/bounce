@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import Stopwatch from "./Stopwatch";
 import edit from "../../public/images/edit.png";
+import trash from "../../public/images/trash.png";
 
 import styles from "../../styles/Task.module.css";
 
@@ -36,6 +37,7 @@ export default function Task(props: {
   onPlayClick: (task: TaskItem) => void;
   onPauseClick: (time: number, task: TaskItem) => void;
   onEditClick: () => void;
+  onTrashClick: () => void;
   pastDue: boolean;
 }) {
   const buttonSize = 20;
@@ -84,6 +86,15 @@ export default function Task(props: {
             height={buttonSize}
             alt="Edit button"
             onClick={(event) => props.onEditClick()}
+          />
+        </div>
+        <div className={styles.edit}>
+          <Image
+            src={trash}
+            width={buttonSize}
+            height={buttonSize}
+            alt="Trash button"
+            onClick={(event) => props.onTrashClick()}
           />
         </div>
       </div>

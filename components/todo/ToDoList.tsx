@@ -210,6 +210,20 @@ export default function ToDoList(props: { user: any }) {
     setter(newList);
   }
 
+  function handleTrash(task: TaskItem) {
+    if (completed.some((curr) => curr.id === task.id)) {
+      handleTrashHelper(completed, setCompleted, task);
+    } else if (taskList.some((curr) => curr.id === task.id)) {
+      handleTrashHelper(taskList, setTaskList, task);
+    } else if (someday.some((curr) => curr.id === task.id)) {
+      handleTrashHelper(someday, setSomeday, task);
+    }
+  }
+
+  function handleTrashHelper(list: TaskItem[], setter, task: TaskItem) {
+    setter(list.slice().filter((curr) => curr.id !== task.id));
+  }
+
   function renderList(list: TaskItem[], label: string, length: number) {
     return (
       <div className={`${styles.container} ${utilStyles.container}`}>
@@ -229,6 +243,7 @@ export default function ToDoList(props: { user: any }) {
                 onPlayClick={() => handlePlay(task)}
                 onPauseClick={handlePause}
                 onEditClick={() => handleEdit(task)}
+                onTrashClick={() => handleTrash(task)}
                 pastDue={
                   task.deadline !== "" &&
                   new Date(task.deadline).getTime() < currentDate.getTime()
@@ -243,6 +258,7 @@ export default function ToDoList(props: { user: any }) {
                 onPlayClick={() => handlePlay(task)}
                 onPauseClick={handlePause}
                 onEditClick={handleEdit}
+                onTrashClick={() => handleTrash(task)}
               />
             )
           )}

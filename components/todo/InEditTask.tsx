@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import Stopwatch from "./Stopwatch";
 import checklist from "../../public/images/checklist.png";
-import x from "../../public/images/x.png";
+import trash from "../../public/images/trash.png";
 import { TaskItem } from "./Task";
 
 import styles from "../../styles/InEditTask.module.css";
@@ -15,6 +15,7 @@ export default function InEditTask(props: {
   onPlayClick: (task: TaskItem) => void;
   onPauseClick: (time: number, task: TaskItem) => void;
   onEditClick: (task: TaskItem) => void;
+  onTrashClick: () => void;
 }) {
   const buttonSize = 20;
   const [task, setTask] = useState<TaskItem>(props.task);
@@ -81,6 +82,17 @@ export default function InEditTask(props: {
             alt="Discard Changes button"
             onClick={(event) => props.onEditClick(props.task)}
           /> */}
+        </div>
+        <div className={styles.edit}>
+          <Image
+            src={trash}
+            width={buttonSize}
+            height={buttonSize}
+            alt="Edit button"
+            onClick={(event) => {
+              props.onTrashClick();
+            }}
+          />
         </div>
       </div>
     </div>
